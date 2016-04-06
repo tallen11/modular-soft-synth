@@ -10,7 +10,9 @@
 		A4F610781CB49E87009A6F88 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4F610771CB49E87009A6F88 /* main.cpp */; };
 		A4F610841CB4A0B8009A6F88 /* MOscillator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4F610821CB4A0B8009A6F88 /* MOscillator.cpp */; };
 		A4F610871CB4A635009A6F88 /* Synth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4F610851CB4A635009A6F88 /* Synth.cpp */; };
-		A4F6108C1CB4A87D009A6F88 /* ModuleIO.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4F6108A1CB4A87D009A6F88 /* ModuleIO.cpp */; };
+		A4F6108C1CB4A87D009A6F88 /* ModuleDataBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4F6108A1CB4A87D009A6F88 /* ModuleDataBuffer.cpp */; };
+		A4F610921CB4ADD1009A6F88 /* ModuleInput.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4F610901CB4ADD1009A6F88 /* ModuleInput.cpp */; };
+		A4F610951CB4AEF0009A6F88 /* ModuleOutput.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4F610931CB4AEF0009A6F88 /* ModuleOutput.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -33,8 +35,12 @@
 		A4F610831CB4A0B8009A6F88 /* MOscillator.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = MOscillator.hpp; sourceTree = "<group>"; };
 		A4F610851CB4A635009A6F88 /* Synth.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Synth.cpp; sourceTree = "<group>"; };
 		A4F610861CB4A635009A6F88 /* Synth.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Synth.hpp; sourceTree = "<group>"; };
-		A4F6108A1CB4A87D009A6F88 /* ModuleIO.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ModuleIO.cpp; sourceTree = "<group>"; };
-		A4F6108B1CB4A87D009A6F88 /* ModuleIO.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ModuleIO.hpp; sourceTree = "<group>"; };
+		A4F6108A1CB4A87D009A6F88 /* ModuleDataBuffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ModuleDataBuffer.cpp; sourceTree = "<group>"; };
+		A4F6108B1CB4A87D009A6F88 /* ModuleDataBuffer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ModuleDataBuffer.hpp; sourceTree = "<group>"; };
+		A4F610901CB4ADD1009A6F88 /* ModuleInput.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ModuleInput.cpp; sourceTree = "<group>"; };
+		A4F610911CB4ADD1009A6F88 /* ModuleInput.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ModuleInput.hpp; sourceTree = "<group>"; };
+		A4F610931CB4AEF0009A6F88 /* ModuleOutput.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ModuleOutput.cpp; sourceTree = "<group>"; };
+		A4F610941CB4AEF0009A6F88 /* ModuleOutput.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ModuleOutput.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,8 +103,12 @@
 		A4F610891CB4A863009A6F88 /* Module IO */ = {
 			isa = PBXGroup;
 			children = (
-				A4F6108B1CB4A87D009A6F88 /* ModuleIO.hpp */,
-				A4F6108A1CB4A87D009A6F88 /* ModuleIO.cpp */,
+				A4F6108B1CB4A87D009A6F88 /* ModuleDataBuffer.hpp */,
+				A4F6108A1CB4A87D009A6F88 /* ModuleDataBuffer.cpp */,
+				A4F610911CB4ADD1009A6F88 /* ModuleInput.hpp */,
+				A4F610901CB4ADD1009A6F88 /* ModuleInput.cpp */,
+				A4F610941CB4AEF0009A6F88 /* ModuleOutput.hpp */,
+				A4F610931CB4AEF0009A6F88 /* ModuleOutput.cpp */,
 			);
 			name = "Module IO";
 			sourceTree = "<group>";
@@ -161,7 +171,9 @@
 			files = (
 				A4F610781CB49E87009A6F88 /* main.cpp in Sources */,
 				A4F610841CB4A0B8009A6F88 /* MOscillator.cpp in Sources */,
-				A4F6108C1CB4A87D009A6F88 /* ModuleIO.cpp in Sources */,
+				A4F6108C1CB4A87D009A6F88 /* ModuleDataBuffer.cpp in Sources */,
+				A4F610921CB4ADD1009A6F88 /* ModuleInput.cpp in Sources */,
+				A4F610951CB4AEF0009A6F88 /* ModuleOutput.cpp in Sources */,
 				A4F610871CB4A635009A6F88 /* Synth.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

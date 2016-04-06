@@ -6,35 +6,35 @@
 //  Copyright © 2016 tate. All rights reserved.
 //
 
-#include "ModuleIO.hpp"
+#include "ModuleDataBuffer.hpp"
 
-ModuleIO::ModuleIO(const std::string &name)
+ModuleDataBuffer::ModuleDataBuffer(const std::string &name)
 {
     this->name = name;
     this->buffer = new std::queue<double>();
 }
 
-ModuleIO::~ModuleIO()
+ModuleDataBuffer::~ModuleDataBuffer()
 {
     delete this->buffer;
 }
 
-const std::string& ModuleIO::getName()
+const std::string& ModuleDataBuffer::getName()
 {
     return this->name;
 }
 
-void ModuleIO::writeData(double data)
+void ModuleDataBuffer::writeData(double data)
 {
     this->buffer->push(data);
 }
 
-bool ModuleIO::hasData()
+bool ModuleDataBuffer::hasData()
 {
     return !this->buffer->empty();
 }
 
-double ModuleIO::readData()
+double ModuleDataBuffer::readData()
 {
     double data = this->buffer->back();
     this->buffer->pop();

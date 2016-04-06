@@ -1,22 +1,22 @@
 //
-//  ModuleIO.hpp
+//  ModuleDataBuffer.hpp
 //  ModularSoftSynth
 //
 //  Created by Tate Allen on 4/5/16.
 //  Copyright © 2016 tate. All rights reserved.
 //
 
-#ifndef ModuleIO_hpp
-#define ModuleIO_hpp
+#ifndef ModuleDataBuffer_hpp
+#define ModuleDataBuffer_hpp
 
 #include <queue>
 #include <string>
 
-class ModuleIO {
+class ModuleDataBuffer {
     
 public:
-    ModuleIO(const std::string &name);
-    ~ModuleIO();
+    ModuleDataBuffer(const std::string &name);
+    ~ModuleDataBuffer();
     const std::string& getName();
     void writeData(double data);
     bool hasData();
@@ -27,4 +27,4 @@ private:
     std::queue<double> *buffer;
 };
 
-#endif /* ModuleIO_hpp */
+#endif /* ModuleDataBuffer_hpp */
