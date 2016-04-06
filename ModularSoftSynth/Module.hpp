@@ -17,19 +17,17 @@
 class Module {
     
 public:
-    Module() {
-        this->inputs = std::vector<ModuleInput*>();
-    };
+    Module() { };
+    virtual ~Module() { };
+    virtual void update(double x) = 0;
     
-    virtual ~Module() {
+    void hasInputs() { this->inputs = new std::vector<ModuleInput*>(); };
+    void hasOutput() { this->output = new ModuleOutput(); };
     
-    };
-    
-    virtual void update() = 0;
-    
-    void createInput(const std::string &name) {
+    ModuleInput* createInput(const std::string &name) {
         auto input = new ModuleInput(name);
-        this->inputs.push_back(input);
+        this->inputs->push_back(input);
+        return input;
     };
     
     ModuleOutput* getOutput() {
@@ -37,7 +35,7 @@ public:
     }
     
     ModuleInput* getInputNamed(const std::string &name) {
-        for (auto input : this->inputs) {
+        for (auto input : *this->inputs) {
             if (input->getName() == name) {
                 return input;
             }
@@ -47,8 +45,8 @@ public:
     };
     
 protected:
-    std::vector<ModuleInput*> inputs;
-    ModuleOutput *output;
+    std::vector<ModuleInput*> *inputs = nullptr;
+    ModuleOutput *output = nullptr;
 };
 
 #endif /* Module_hpp */

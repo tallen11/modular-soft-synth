@@ -16,7 +16,11 @@ class MOscillator : public Module {
 public:
     MOscillator();
     ~MOscillator();
-    void update();
+    void update(double x);
+    
+private:
+    ModuleInput *frequencyInput;
+    ModuleInput *amplitudeInput;
 };
 
 #endif /* MOscillator_hpp */

@@ -17,7 +17,7 @@ class Synth {
 public:
     Synth();
     ~Synth();
-    void update();
+    void update(double x);
     void addModule(Module *module);
     void removeModule(Module *module);
     void connectModules(Module *outputModule, Module *inputModule, const std::string &inputName);
