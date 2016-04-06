@@ -23,7 +23,7 @@ public:
     void connectModules(Module *outputModule, Module *inputModule, const std::string &inputName);
     
 private:
-    std::vector<Module*> *modules;
+    std::vector<Module*> modules;
 };
 
 #endif /* Synth_hpp */

@@ -10,32 +10,44 @@
 
 Synth::Synth()
 {
-    this->modules = new std::vector<Module*>();
+    this->modules = std::vector<Module*>();
 }
 
 Synth::~Synth()
 {
-    delete this->modules;
+    // delete this->modules;
 }
 
 void Synth::update()
 {
-    for (auto module : *this->modules) {
+    for (auto module : this->modules) {
         module->update();
     }
 }
 
 void Synth::addModule(Module *module)
 {
-    
+    this->modules.push_back(module);
 }
 
 void Synth::removeModule(Module *module)
 {
-    
+    int index = 0;
+    for (auto synthModule : this->modules) {
+        if (synthModule == module) {
+            this->modules.erase(this->modules.begin() + index);
+            break;
+        }
+        
+        index++;
+    }
 }
 
 void Synth::connectModules(Module *outputModule, Module *inputModule, const std::string &inputName)
 {
-    
+    auto output = outputModule->getOutput();
+    auto input = inputModule->getInputNamed(inputName);
+    auto dataBuffer = new ModuleDataBuffer(); // TODO: Delete this somewhere...
+    output->setDataBuffer(dataBuffer);
+    input->setDataBuffer(dataBuffer);
 }

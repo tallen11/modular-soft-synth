@@ -10,7 +10,8 @@
 
 MOscillator::MOscillator()
 {
-    
+    this->createInput("frequency"); // The desired frequency of the sine wave
+    this->createInput("amplitude"); // The desired max amplitude of the sine wave
 }
 
 MOscillator::~MOscillator()

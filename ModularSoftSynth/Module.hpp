@@ -32,6 +32,20 @@ public:
         this->inputs.push_back(input);
     };
     
+    ModuleOutput* getOutput() {
+        return this->output;
+    }
+    
+    ModuleInput* getInputNamed(const std::string &name) {
+        for (auto input : this->inputs) {
+            if (input->getName() == name) {
+                return input;
+            }
+        }
+        
+        return nullptr;
+    };
+    
 protected:
     std::vector<ModuleInput*> inputs;
     ModuleOutput *output;
