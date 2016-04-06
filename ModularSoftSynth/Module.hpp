@@ -19,7 +19,7 @@ class Module {
 public:
     Module() { };
     virtual ~Module() { };
-    virtual void update(double x) = 0;
+    virtual void update() = 0;
     
     void hasInputs() { this->inputs = new std::vector<ModuleInput*>(); };
     void hasOutput() { this->output = new ModuleOutput(); };

@@ -15,12 +15,14 @@ class MOscillator : public Module {
     
 public:
     MOscillator();
+    MOscillator(double frequency);
     ~MOscillator();
-    void update(double x);
+    void update();
     
 private:
     ModuleInput *frequencyInput;
     ModuleInput *amplitudeInput;
+    int lastIndex;
 };
 
 #endif /* MOscillator_hpp */

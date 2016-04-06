@@ -20,7 +20,8 @@ public:
     ~ModuleInput();
     const std::string& getName();
     void setDataBuffer(ModuleDataBuffer *inputDataBuffer);
-    bool hasData();
+    bool canRead();
+    size_t getBufferSize();
     double readData();
     
 private:

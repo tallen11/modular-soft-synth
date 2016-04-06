@@ -9,7 +9,8 @@
 #ifndef ModuleDataBuffer_hpp
 #define ModuleDataBuffer_hpp
 
-#include <queue>
+//#include <queue>
+#include "TSQueue.h"
 #include <string>
 
 class ModuleDataBuffer {
@@ -19,10 +20,12 @@ public:
     ~ModuleDataBuffer();
     void writeData(double data);
     bool hasData();
+    size_t getSize();
     double readData();
     
 private:
-    std::queue<double> *buffer;
+    TSQueue<double> *buffer;
+//    std::queue<double> *buffer;
 };
 
 #endif /* ModuleDataBuffer_hpp */

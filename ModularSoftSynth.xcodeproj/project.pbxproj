@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A48667831CB5845100310C29 /* MValue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A48667811CB5845100310C29 /* MValue.cpp */; };
 		A4F610781CB49E87009A6F88 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4F610771CB49E87009A6F88 /* main.cpp */; };
 		A4F610841CB4A0B8009A6F88 /* MOscillator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4F610821CB4A0B8009A6F88 /* MOscillator.cpp */; };
 		A4F610871CB4A635009A6F88 /* Synth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4F610851CB4A635009A6F88 /* Synth.cpp */; };
@@ -36,6 +37,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		A48667801CB5825200310C29 /* TSQueue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSQueue.h; sourceTree = "<group>"; };
+		A48667811CB5845100310C29 /* MValue.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MValue.cpp; sourceTree = "<group>"; };
+		A48667821CB5845100310C29 /* MValue.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = MValue.hpp; sourceTree = "<group>"; };
 		A4F610741CB49E87009A6F88 /* ModularSoftSynth */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ModularSoftSynth; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4F610771CB49E87009A6F88 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		A4F6107F1CB49FDE009A6F88 /* Module.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Module.hpp; sourceTree = "<group>"; };
@@ -79,6 +83,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A486677F1CB5823000310C29 /* External */ = {
+			isa = PBXGroup;
+			children = (
+				A48667801CB5825200310C29 /* TSQueue.h */,
+			);
+			name = External;
+			sourceTree = "<group>";
+		};
 		A4F6106B1CB49E87009A6F88 = {
 			isa = PBXGroup;
 			children = (
@@ -100,6 +112,7 @@
 		A4F610761CB49E87009A6F88 /* ModularSoftSynth */ = {
 			isa = PBXGroup;
 			children = (
+				A486677F1CB5823000310C29 /* External */,
 				A4F610961CB4B94E009A6F88 /* Test */,
 				A4F610881CB4A63D009A6F88 /* Synths */,
 				A4F610811CB4A0A0009A6F88 /* Modules */,
@@ -117,6 +130,8 @@
 				A4F610821CB4A0B8009A6F88 /* MOscillator.cpp */,
 				A4F6109B1CB4B9C8009A6F88 /* MFinal.hpp */,
 				A4F6109A1CB4B9C8009A6F88 /* MFinal.cpp */,
+				A48667821CB5845100310C29 /* MValue.hpp */,
+				A48667811CB5845100310C29 /* MValue.cpp */,
 			);
 			name = Modules;
 			sourceTree = "<group>";
@@ -229,6 +244,7 @@
 				A4F610921CB4ADD1009A6F88 /* ModuleInput.cpp in Sources */,
 				A4F610951CB4AEF0009A6F88 /* ModuleOutput.cpp in Sources */,
 				A4F610871CB4A635009A6F88 /* Synth.cpp in Sources */,
+				A48667831CB5845100310C29 /* MValue.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -355,6 +371,7 @@
 				A4F6107D1CB49E87009A6F88 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

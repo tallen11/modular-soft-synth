@@ -12,14 +12,13 @@
 int MFinal::callback(const void *input, void *output, unsigned long frameCount, const PaStreamCallbackTimeInfo* timeInfo, PaStreamCallbackFlags statusFlags, void *userData)
 {
     auto dataInput = static_cast<ModuleInput*>(userData);
-    float *out = (float*)output;
-    
-    while (dataInput->hasData()) {
-        *out++ = (float)dataInput->readData();
+    auto out = static_cast<float*>(output);
+    for (int i = 0; i < frameCount; ++i) {
+        if (dataInput->canRead()) {
+            float d = (float)dataInput->readData();
+            out[i] = d;
+        }
     }
-//    for (int i = 0; i < frameCount; ++i) {
-//        *out++ = (float)dataInput->readData();
-//    }
     
     return 0;
 }
@@ -50,9 +49,7 @@ MFinal::~MFinal()
     
 }
 
-void MFinal::update(double x)
+void MFinal::update()
 {
-    if (this->dataInput->hasData()) {
-//        std::cout << "Data: " << this->dataInput->readData() << std::endl;
-    }
+    
 }

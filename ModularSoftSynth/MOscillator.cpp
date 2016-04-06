@@ -10,12 +10,12 @@
 #include <cmath>
 #include <iostream>
 
+const static int SAMPLES_PER_SEC = 44100;
+
 MOscillator::MOscillator()
 {
-    this->hasInputs();
     this->hasOutput();
-    this->frequencyInput = this->createInput("frequency"); // The desired frequency of the sine wave
-    this->amplitudeInput = this->createInput("amplitude"); // The desired max amplitude of the sine wave
+    this->lastIndex = 0;
 }
 
 MOscillator::~MOscillator()
@@ -23,9 +23,13 @@ MOscillator::~MOscillator()
     
 }
 
-void MOscillator::update(double x)
+void MOscillator::update()
 {
     // Test data for now
-    double data = sin(2 * M_PI * 440.0 * x);
-    this->output->writeData(data);
+    while (this->output->canWrite()) {
+        double dx = (double)lastIndex / SAMPLES_PER_SEC;
+        double data = sin(2 * M_PI * 880.0 * dx);
+        this->output->writeData(data);
+        lastIndex++;
+    }    
 }

@@ -29,6 +29,16 @@ void ModuleOutput::setDataBuffer(ModuleDataBuffer *outputDataBuffer)
     this->dataBuffer = outputDataBuffer;
 }
 
+bool ModuleOutput::canWrite()
+{
+    return this->dataBuffer->getSize() < MAX_BUFFER_SIZE;
+}
+
+size_t ModuleOutput::getBufferSize()
+{
+    return this->dataBuffer->getSize();
+}
+
 void ModuleOutput::writeData(double data)
 {
     assert(this->dataBuffer != nullptr);

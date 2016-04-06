@@ -10,7 +10,7 @@
 
 ModuleDataBuffer::ModuleDataBuffer()
 {
-    this->buffer = new std::queue<double>();
+    this->buffer = new TSQueue<double>();
 }
 
 ModuleDataBuffer::~ModuleDataBuffer()
@@ -25,13 +25,16 @@ void ModuleDataBuffer::writeData(double data)
 
 bool ModuleDataBuffer::hasData()
 {
-    return !this->buffer->empty();
+    return this->buffer->getSize() > 0;
+}
+
+size_t ModuleDataBuffer::getSize()
+{
+    return this->buffer->getSize();
 }
 
 double ModuleDataBuffer::readData()
 {
-    double data = this->buffer->back();
-    this->buffer->pop();
-    
+    double data = this->buffer->pop();
     return data;
 }

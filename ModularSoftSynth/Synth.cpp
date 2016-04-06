@@ -18,10 +18,10 @@ Synth::~Synth()
     // delete this->modules;
 }
 
-void Synth::update(double x)
+void Synth::update()
 {
     for (auto module : this->modules) {
-        module->update(x);
+        module->update();
     }
 }
 
