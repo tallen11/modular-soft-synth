@@ -9,19 +9,22 @@
 #ifndef ModuleInput_hpp
 #define ModuleInput_hpp
 
+#include <string>
 #include "ModuleDataBuffer.hpp"
 
 class ModuleInput {
     
 public:
-    ModuleInput();
-    ModuleInput(ModuleDataBuffer *inputDataBuffer);
+    ModuleInput(const std::string &name);
+    ModuleInput(const std::string &name, ModuleDataBuffer *inputDataBuffer);
     ~ModuleInput();
+    const std::string& getName();
     void setDataBuffer(ModuleDataBuffer *inputDataBuffer);
     bool hasData();
     double readData();
     
 private:
+    std::string name;
     ModuleDataBuffer *dataBuffer;
 };
 

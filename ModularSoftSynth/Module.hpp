@@ -10,19 +10,31 @@
 #define Module_hpp
 
 #include <vector>
+#include <string>
+#include "ModuleInput.hpp"
+#include "ModuleOutput.hpp"
 
 class Module {
     
 public:
     Module() {
-        this->outputs = new std::vector<Module*>();
+        this->inputs = std::vector<ModuleInput*>();
     };
     
-    virtual ~Module() { };
+    virtual ~Module() {
+    
+    };
+    
     virtual void update() = 0;
     
+    void createInput(const std::string &name) {
+        auto input = new ModuleInput(name);
+        this->inputs.push_back(input);
+    };
+    
 protected:
-    std::vector<Module*> *outputs;
+    std::vector<ModuleInput*> inputs;
+    ModuleOutput *output;
 };
 
 #endif /* Module_hpp */

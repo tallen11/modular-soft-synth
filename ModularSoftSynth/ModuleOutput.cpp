@@ -7,6 +7,7 @@
 //
 
 #include "ModuleOutput.hpp"
+#include <cassert>
 
 ModuleOutput::ModuleOutput()
 {
@@ -30,5 +31,6 @@ void ModuleOutput::setDataBuffer(ModuleDataBuffer *outputDataBuffer)
 
 void ModuleOutput::writeData(double data)
 {
+    assert(this->dataBuffer != nullptr);
     this->dataBuffer->writeData(data);
 }

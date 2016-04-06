@@ -8,20 +8,14 @@
 
 #include "ModuleDataBuffer.hpp"
 
-ModuleDataBuffer::ModuleDataBuffer(const std::string &name)
+ModuleDataBuffer::ModuleDataBuffer()
 {
-    this->name = name;
     this->buffer = new std::queue<double>();
 }
 
 ModuleDataBuffer::~ModuleDataBuffer()
 {
     delete this->buffer;
-}
-
-const std::string& ModuleDataBuffer::getName()
-{
-    return this->name;
 }
 
 void ModuleDataBuffer::writeData(double data)

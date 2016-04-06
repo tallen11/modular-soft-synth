@@ -15,15 +15,13 @@
 class ModuleDataBuffer {
     
 public:
-    ModuleDataBuffer(const std::string &name);
+    ModuleDataBuffer();
     ~ModuleDataBuffer();
-    const std::string& getName();
     void writeData(double data);
     bool hasData();
     double readData();
     
 private:
-    std::string name;
     std::queue<double> *buffer;
 };
 

@@ -73,7 +73,6 @@
 		A4F610761CB49E87009A6F88 /* ModularSoftSynth */ = {
 			isa = PBXGroup;
 			children = (
-				A4F610891CB4A863009A6F88 /* Module IO */,
 				A4F610881CB4A63D009A6F88 /* Synths */,
 				A4F610811CB4A0A0009A6F88 /* Modules */,
 				A4F610771CB49E87009A6F88 /* main.cpp */,
@@ -84,6 +83,7 @@
 		A4F610811CB4A0A0009A6F88 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				A4F610891CB4A863009A6F88 /* Module IO */,
 				A4F6107F1CB49FDE009A6F88 /* Module.hpp */,
 				A4F610831CB4A0B8009A6F88 /* MOscillator.hpp */,
 				A4F610821CB4A0B8009A6F88 /* MOscillator.cpp */,
