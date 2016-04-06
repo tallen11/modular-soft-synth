@@ -20,7 +20,7 @@ public:
     void update();
     void addModule(Module *module);
     void removeModule(Module *module);
-    void connectModules(Module *outputModule, Module *inputModule);
+    void connectModules(Module *outputModule, Module *inputModule, const std::string &inputName);
     
 private:
     std::vector<Module*> *modules;

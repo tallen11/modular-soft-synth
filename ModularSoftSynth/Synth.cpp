@@ -35,7 +35,7 @@ void Synth::removeModule(Module *module)
     
 }
 
-void Synth::connectModules(Module *outputModule, Module *inputModule)
+void Synth::connectModules(Module *outputModule, Module *inputModule, const std::string &inputName)
 {
     
 }
