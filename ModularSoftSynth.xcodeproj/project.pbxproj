@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		A4F610781CB49E87009A6F88 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4F610771CB49E87009A6F88 /* main.cpp */; };
+		A4F610841CB4A0B8009A6F88 /* MOscillator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4F610821CB4A0B8009A6F88 /* MOscillator.cpp */; };
+		A4F610871CB4A635009A6F88 /* Synth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4F610851CB4A635009A6F88 /* Synth.cpp */; };
+		A4F6108C1CB4A87D009A6F88 /* ModuleInput.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4F6108A1CB4A87D009A6F88 /* ModuleInput.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +28,13 @@
 /* Begin PBXFileReference section */
 		A4F610741CB49E87009A6F88 /* ModularSoftSynth */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ModularSoftSynth; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4F610771CB49E87009A6F88 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		A4F6107F1CB49FDE009A6F88 /* Module.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Module.hpp; sourceTree = "<group>"; };
+		A4F610821CB4A0B8009A6F88 /* MOscillator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MOscillator.cpp; sourceTree = "<group>"; };
+		A4F610831CB4A0B8009A6F88 /* MOscillator.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = MOscillator.hpp; sourceTree = "<group>"; };
+		A4F610851CB4A635009A6F88 /* Synth.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Synth.cpp; sourceTree = "<group>"; };
+		A4F610861CB4A635009A6F88 /* Synth.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Synth.hpp; sourceTree = "<group>"; };
+		A4F6108A1CB4A87D009A6F88 /* ModuleInput.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ModuleInput.cpp; sourceTree = "<group>"; };
+		A4F6108B1CB4A87D009A6F88 /* ModuleInput.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ModuleInput.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,9 +67,40 @@
 		A4F610761CB49E87009A6F88 /* ModularSoftSynth */ = {
 			isa = PBXGroup;
 			children = (
+				A4F610891CB4A863009A6F88 /* Module IO */,
+				A4F610881CB4A63D009A6F88 /* Synths */,
+				A4F610811CB4A0A0009A6F88 /* Modules */,
 				A4F610771CB49E87009A6F88 /* main.cpp */,
 			);
 			path = ModularSoftSynth;
+			sourceTree = "<group>";
+		};
+		A4F610811CB4A0A0009A6F88 /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				A4F6107F1CB49FDE009A6F88 /* Module.hpp */,
+				A4F610831CB4A0B8009A6F88 /* MOscillator.hpp */,
+				A4F610821CB4A0B8009A6F88 /* MOscillator.cpp */,
+			);
+			name = Modules;
+			sourceTree = "<group>";
+		};
+		A4F610881CB4A63D009A6F88 /* Synths */ = {
+			isa = PBXGroup;
+			children = (
+				A4F610861CB4A635009A6F88 /* Synth.hpp */,
+				A4F610851CB4A635009A6F88 /* Synth.cpp */,
+			);
+			name = Synths;
+			sourceTree = "<group>";
+		};
+		A4F610891CB4A863009A6F88 /* Module IO */ = {
+			isa = PBXGroup;
+			children = (
+				A4F6108B1CB4A87D009A6F88 /* ModuleInput.hpp */,
+				A4F6108A1CB4A87D009A6F88 /* ModuleInput.cpp */,
+			);
+			name = "Module IO";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -119,6 +160,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				A4F610781CB49E87009A6F88 /* main.cpp in Sources */,
+				A4F610841CB4A0B8009A6F88 /* MOscillator.cpp in Sources */,
+				A4F6108C1CB4A87D009A6F88 /* ModuleInput.cpp in Sources */,
+				A4F610871CB4A635009A6F88 /* Synth.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
