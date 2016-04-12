@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A48667831CB5845100310C29 /* MValue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A48667811CB5845100310C29 /* MValue.cpp */; };
+		A48667861CB5CA5700310C29 /* MAdder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A48667841CB5CA5700310C29 /* MAdder.cpp */; };
 		A4F610781CB49E87009A6F88 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4F610771CB49E87009A6F88 /* main.cpp */; };
 		A4F610841CB4A0B8009A6F88 /* MOscillator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4F610821CB4A0B8009A6F88 /* MOscillator.cpp */; };
 		A4F610871CB4A635009A6F88 /* Synth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4F610851CB4A635009A6F88 /* Synth.cpp */; };
@@ -40,6 +41,8 @@
 		A48667801CB5825200310C29 /* TSQueue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSQueue.h; sourceTree = "<group>"; };
 		A48667811CB5845100310C29 /* MValue.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MValue.cpp; sourceTree = "<group>"; };
 		A48667821CB5845100310C29 /* MValue.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = MValue.hpp; sourceTree = "<group>"; };
+		A48667841CB5CA5700310C29 /* MAdder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MAdder.cpp; sourceTree = "<group>"; };
+		A48667851CB5CA5700310C29 /* MAdder.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = MAdder.hpp; sourceTree = "<group>"; };
 		A4F610741CB49E87009A6F88 /* ModularSoftSynth */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ModularSoftSynth; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4F610771CB49E87009A6F88 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		A4F6107F1CB49FDE009A6F88 /* Module.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Module.hpp; sourceTree = "<group>"; };
@@ -132,6 +135,8 @@
 				A4F6109A1CB4B9C8009A6F88 /* MFinal.cpp */,
 				A48667821CB5845100310C29 /* MValue.hpp */,
 				A48667811CB5845100310C29 /* MValue.cpp */,
+				A48667851CB5CA5700310C29 /* MAdder.hpp */,
+				A48667841CB5CA5700310C29 /* MAdder.cpp */,
 			);
 			name = Modules;
 			sourceTree = "<group>";
@@ -240,6 +245,7 @@
 				A4F610991CB4B961009A6F88 /* TestSynth.cpp in Sources */,
 				A4F6109C1CB4B9C8009A6F88 /* MFinal.cpp in Sources */,
 				A4F610841CB4A0B8009A6F88 /* MOscillator.cpp in Sources */,
+				A48667861CB5CA5700310C29 /* MAdder.cpp in Sources */,
 				A4F6108C1CB4A87D009A6F88 /* ModuleDataBuffer.cpp in Sources */,
 				A4F610921CB4ADD1009A6F88 /* ModuleInput.cpp in Sources */,
 				A4F610951CB4AEF0009A6F88 /* ModuleOutput.cpp in Sources */,

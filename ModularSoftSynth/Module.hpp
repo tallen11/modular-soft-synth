@@ -14,6 +14,9 @@
 #include "ModuleInput.hpp"
 #include "ModuleOutput.hpp"
 
+#define MAX_BUFFER_SIZE (100)
+#define SAMPLE_RATE (44100);
+
 class Module {
     
 public:

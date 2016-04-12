@@ -10,11 +10,17 @@
 #include <cmath>
 #include <iostream>
 
-const static int SAMPLES_PER_SEC = 44100;
-
 MOscillator::MOscillator()
 {
     this->hasOutput();
+    this->frequency = 440.0;
+    this->lastIndex = 0;
+}
+
+MOscillator::MOscillator(double frequency)
+{
+    this->hasOutput();
+    this->frequency = frequency;
     this->lastIndex = 0;
 }
 
@@ -26,9 +32,9 @@ MOscillator::~MOscillator()
 void MOscillator::update()
 {
     // Test data for now
-    while (this->output->canWrite()) {
-        double dx = (double)lastIndex / SAMPLES_PER_SEC;
-        double data = sin(2 * M_PI * 880.0 * dx);
+    while (this->output->getBufferSize() < MAX_BUFFER_SIZE) {
+        double dx = (double)lastIndex / SAMPLE_RATE;
+        double data = sin(2 * M_PI * this->frequency * dx);
         this->output->writeData(data);
         lastIndex++;
     }    

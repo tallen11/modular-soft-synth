@@ -38,7 +38,7 @@ void ModuleInput::setDataBuffer(ModuleDataBuffer *inputDataBuffer)
 
 bool ModuleInput::canRead()
 {
-    return this->dataBuffer->hasData();
+    return this->dataBuffer != nullptr && this->dataBuffer->hasData();
 }
 
 size_t ModuleInput::getBufferSize()

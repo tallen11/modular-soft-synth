@@ -20,8 +20,7 @@ public:
     void update();
     
 private:
-    ModuleInput *frequencyInput;
-    ModuleInput *amplitudeInput;
+    double frequency;
     int lastIndex;
 };
 

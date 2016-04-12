@@ -8,16 +8,29 @@
 
 #include "MFinal.hpp"
 #include <iostream>
+#include <cmath>
 
 int MFinal::callback(const void *input, void *output, unsigned long frameCount, const PaStreamCallbackTimeInfo* timeInfo, PaStreamCallbackFlags statusFlags, void *userData)
 {
     auto dataInput = static_cast<ModuleInput*>(userData);
+//    size_t size = fmin(dataInput->getBufferSize(), frameCount);
+////    std::cout << size << std::endl;
+//    double data[size];
+//    double dataMax = 0.0;
+//    for (int i = 0; i < size; ++i) {
+//        data[i] = dataInput->readData();
+//        if (data[i] > dataMax) {
+//            dataMax = data[i];
+//        }
+//    }
+//    
+//    for (int i = 0; i < size; ++i) {
+//        data[i] /= dataMax;
+//    }
+    
     auto out = static_cast<float*>(output);
     for (int i = 0; i < frameCount; ++i) {
-        if (dataInput->canRead()) {
-            float d = (float)dataInput->readData();
-            out[i] = d;
-        }
+        out[i] = dataInput->readData(); // data[i];
     }
     
     return 0;

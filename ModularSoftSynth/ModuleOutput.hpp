@@ -11,7 +11,7 @@
 
 #include "ModuleDataBuffer.hpp"
 
-#define MAX_BUFFER_SIZE 1000
+//#define MAX_BUFFER_SIZE 100
 
 class ModuleOutput {
     
@@ -20,7 +20,6 @@ public:
     ModuleOutput(ModuleDataBuffer *outputDataBuffer);
     ~ModuleOutput();
     void setDataBuffer(ModuleDataBuffer *outputDataBuffer);
-    bool canWrite();
     size_t getBufferSize();
     void writeData(double data);
     

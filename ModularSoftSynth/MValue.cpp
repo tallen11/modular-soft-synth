@@ -20,7 +20,7 @@ MValue::~MValue()
 
 void MValue::update()
 {
-    if (this->output->getBufferSize() == 0) {
+    while (this->output->getBufferSize() < MAX_BUFFER_SIZE) {
         this->output->writeData(this->value);
     }
 }

@@ -25,7 +25,6 @@ public:
     
 private:
     TSQueue<double> *buffer;
-//    std::queue<double> *buffer;
 };
 
 #endif /* ModuleDataBuffer_hpp */
