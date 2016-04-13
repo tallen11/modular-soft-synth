@@ -27,7 +27,11 @@ void MAdder::update()
 {
     for (int i = 0; i < MAX_BUFFER_SIZE; ++i) {
         double data1 = wave1Input->readData();
-        double data2 = wave2Input->readData();
-        output->writeData(data1 + data2);
+        if (isEnabled()) {
+            double data2 = wave2Input->readData();
+            output->writeData((data1 + data2) / 2.0);
+        } else {
+            output->writeData(data1);
+        }
     }
 }

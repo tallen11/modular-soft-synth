@@ -7,6 +7,7 @@
 //
 
 #include "Synth.hpp"
+#include <iostream>
 
 Synth::Synth()
 {
@@ -18,6 +19,8 @@ Synth::~Synth()
     // delete this->modules;
 }
 
+//double averageTime = 0.00735;
+//int counter = 0;
 void Synth::update()
 {
     for (auto module : this->modules) {

@@ -7,8 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A44255051CBDA96800F9FAC0 /* MModulator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A44255031CBDA96800F9FAC0 /* MModulator.cpp */; };
 		A48667831CB5845100310C29 /* MValue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A48667811CB5845100310C29 /* MValue.cpp */; };
 		A48667861CB5CA5700310C29 /* MAdder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A48667841CB5CA5700310C29 /* MAdder.cpp */; };
+		A4B434BA1CBC8AD800EF7A75 /* MLowPassFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4B434B81CBC8AD800EF7A75 /* MLowPassFilter.cpp */; };
+		A4B434BD1CBC9DEC00EF7A75 /* MTriadGenerator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4B434BB1CBC9DEC00EF7A75 /* MTriadGenerator.cpp */; };
+		A4B434C31CBCA95800EF7A75 /* MWhiteNoiseGenerator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4B434C11CBCA95800EF7A75 /* MWhiteNoiseGenerator.cpp */; };
 		A4F610781CB49E87009A6F88 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4F610771CB49E87009A6F88 /* main.cpp */; };
 		A4F610841CB4A0B8009A6F88 /* MOscillator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4F610821CB4A0B8009A6F88 /* MOscillator.cpp */; };
 		A4F610871CB4A635009A6F88 /* Synth.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4F610851CB4A635009A6F88 /* Synth.cpp */; };
@@ -38,11 +42,19 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		A44255031CBDA96800F9FAC0 /* MModulator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MModulator.cpp; sourceTree = "<group>"; };
+		A44255041CBDA96800F9FAC0 /* MModulator.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = MModulator.hpp; sourceTree = "<group>"; };
 		A48667801CB5825200310C29 /* TSQueue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSQueue.h; sourceTree = "<group>"; };
 		A48667811CB5845100310C29 /* MValue.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MValue.cpp; sourceTree = "<group>"; };
 		A48667821CB5845100310C29 /* MValue.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = MValue.hpp; sourceTree = "<group>"; };
 		A48667841CB5CA5700310C29 /* MAdder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MAdder.cpp; sourceTree = "<group>"; };
 		A48667851CB5CA5700310C29 /* MAdder.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = MAdder.hpp; sourceTree = "<group>"; };
+		A4B434B81CBC8AD800EF7A75 /* MLowPassFilter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MLowPassFilter.cpp; sourceTree = "<group>"; };
+		A4B434B91CBC8AD800EF7A75 /* MLowPassFilter.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = MLowPassFilter.hpp; sourceTree = "<group>"; };
+		A4B434BB1CBC9DEC00EF7A75 /* MTriadGenerator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MTriadGenerator.cpp; sourceTree = "<group>"; };
+		A4B434BC1CBC9DEC00EF7A75 /* MTriadGenerator.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = MTriadGenerator.hpp; sourceTree = "<group>"; };
+		A4B434C11CBCA95800EF7A75 /* MWhiteNoiseGenerator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MWhiteNoiseGenerator.cpp; sourceTree = "<group>"; };
+		A4B434C21CBCA95800EF7A75 /* MWhiteNoiseGenerator.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = MWhiteNoiseGenerator.hpp; sourceTree = "<group>"; };
 		A4F610741CB49E87009A6F88 /* ModularSoftSynth */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ModularSoftSynth; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4F610771CB49E87009A6F88 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		A4F6107F1CB49FDE009A6F88 /* Module.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Module.hpp; sourceTree = "<group>"; };
@@ -137,6 +149,14 @@
 				A48667811CB5845100310C29 /* MValue.cpp */,
 				A48667851CB5CA5700310C29 /* MAdder.hpp */,
 				A48667841CB5CA5700310C29 /* MAdder.cpp */,
+				A4B434B91CBC8AD800EF7A75 /* MLowPassFilter.hpp */,
+				A4B434B81CBC8AD800EF7A75 /* MLowPassFilter.cpp */,
+				A4B434BC1CBC9DEC00EF7A75 /* MTriadGenerator.hpp */,
+				A4B434BB1CBC9DEC00EF7A75 /* MTriadGenerator.cpp */,
+				A4B434C21CBCA95800EF7A75 /* MWhiteNoiseGenerator.hpp */,
+				A4B434C11CBCA95800EF7A75 /* MWhiteNoiseGenerator.cpp */,
+				A44255041CBDA96800F9FAC0 /* MModulator.hpp */,
+				A44255031CBDA96800F9FAC0 /* MModulator.cpp */,
 			);
 			name = Modules;
 			sourceTree = "<group>";
@@ -241,16 +261,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A4B434BA1CBC8AD800EF7A75 /* MLowPassFilter.cpp in Sources */,
 				A4F610781CB49E87009A6F88 /* main.cpp in Sources */,
 				A4F610991CB4B961009A6F88 /* TestSynth.cpp in Sources */,
 				A4F6109C1CB4B9C8009A6F88 /* MFinal.cpp in Sources */,
 				A4F610841CB4A0B8009A6F88 /* MOscillator.cpp in Sources */,
+				A44255051CBDA96800F9FAC0 /* MModulator.cpp in Sources */,
 				A48667861CB5CA5700310C29 /* MAdder.cpp in Sources */,
 				A4F6108C1CB4A87D009A6F88 /* ModuleDataBuffer.cpp in Sources */,
 				A4F610921CB4ADD1009A6F88 /* ModuleInput.cpp in Sources */,
+				A4B434BD1CBC9DEC00EF7A75 /* MTriadGenerator.cpp in Sources */,
 				A4F610951CB4AEF0009A6F88 /* ModuleOutput.cpp in Sources */,
 				A4F610871CB4A635009A6F88 /* Synth.cpp in Sources */,
 				A48667831CB5845100310C29 /* MValue.cpp in Sources */,
+				A4B434C31CBCA95800EF7A75 /* MWhiteNoiseGenerator.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

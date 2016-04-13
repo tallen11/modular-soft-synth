@@ -31,11 +31,17 @@ void ModuleOutput::setDataBuffer(ModuleDataBuffer *outputDataBuffer)
 
 size_t ModuleOutput::getBufferSize()
 {
+    if (this->dataBuffer == nullptr) {
+        return 0;
+    }
+    
     return this->dataBuffer->getSize();
 }
 
 void ModuleOutput::writeData(double data)
 {
-    assert(this->dataBuffer != nullptr);
-    this->dataBuffer->writeData(data);
+//    assert(this->dataBuffer != nullptr);
+    if (this->dataBuffer != nullptr) {
+        this->dataBuffer->writeData(data);
+    }
 }

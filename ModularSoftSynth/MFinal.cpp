@@ -10,28 +10,28 @@
 #include <iostream>
 #include <cmath>
 
+float lastHighest = 0.0;
+
 int MFinal::callback(const void *input, void *output, unsigned long frameCount, const PaStreamCallbackTimeInfo* timeInfo, PaStreamCallbackFlags statusFlags, void *userData)
 {
     auto dataInput = static_cast<ModuleInput*>(userData);
-//    size_t size = fmin(dataInput->getBufferSize(), frameCount);
-////    std::cout << size << std::endl;
-//    double data[size];
-//    double dataMax = 0.0;
-//    for (int i = 0; i < size; ++i) {
+//    double data[frameCount];
+//    double maxAmpl = 0.0;
+//    for (unsigned long i = 0; i < frameCount; ++i) {
 //        data[i] = dataInput->readData();
-//        if (data[i] > dataMax) {
-//            dataMax = data[i];
+//        if (fabs(data[i]) > maxAmpl) {
+//            maxAmpl = fabs(data[i]);
 //        }
-//    }
-//    
-//    for (int i = 0; i < size; ++i) {
-//        data[i] /= dataMax;
 //    }
     
     auto out = static_cast<float*>(output);
-    for (int i = 0; i < frameCount; ++i) {
-        out[i] = dataInput->readData(); // data[i];
+    for (unsigned long i = 0; i < frameCount; ++i) {
+        out[i] = dataInput->readData(); // 1.0 * (float)(data[i] / (float)(maxAmpl + lastHighest) / 2.0);
+//        std::cout << out[i] << std::endl;
     }
+    
+//    lastHighest = maxAmpl;
+//    std::cout << "=" << std::endl;
     
     return 0;
 }
@@ -46,7 +46,7 @@ MFinal::MFinal()
         std::cout << "PortAudio error: " << Pa_GetErrorText(err) << std::endl;
     }
     
-    PaError streamError = Pa_OpenDefaultStream(&paStream, 0, 1, paFloat32, 44100, paFramesPerBufferUnspecified, MFinal::callback, this->dataInput);
+    PaError streamError = Pa_OpenDefaultStream(&paStream, 0, 1, paFloat32, 44100, /* paFramesPerBufferUnspecified */ MAX_BUFFER_SIZE, MFinal::callback, this->dataInput);
     if (streamError != paNoError) {
         std::cout << "PortAudio stream error: " << Pa_GetErrorText(streamError) << std::endl;
     }

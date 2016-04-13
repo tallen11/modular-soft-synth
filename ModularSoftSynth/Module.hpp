@@ -14,8 +14,8 @@
 #include "ModuleInput.hpp"
 #include "ModuleOutput.hpp"
 
-#define MAX_BUFFER_SIZE (100)
-#define SAMPLE_RATE (44100);
+#define MAX_BUFFER_SIZE 1000
+#define SAMPLE_RATE 44100
 
 class Module {
     
@@ -47,9 +47,26 @@ public:
         return nullptr;
     };
     
+    inline double envelopeCoeff(double dx)
+    {
+        return -(1.0 / (dx+1)) + 1.0;
+    }
+    
+    bool isEnabled()
+    {
+        return this->enabled;
+    }
+    
+    void setEnabled(bool onState)
+    {
+        this->enabled = onState;
+    }
+    
 protected:
     std::vector<ModuleInput*> *inputs = nullptr;
     ModuleOutput *output = nullptr;
+    bool enabled = true;
+    uint64_t currentTime = 0;
 };
 
 #endif /* Module_hpp */

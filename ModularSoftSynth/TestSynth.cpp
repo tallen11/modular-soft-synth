@@ -8,7 +8,11 @@
 
 #include "TestSynth.hpp"
 #include "MOscillator.hpp"
+#include "MWhiteNoiseGenerator.hpp"
 #include "MAdder.hpp"
+#include "MLowPassFilter.hpp"
+#include "MTriadGenerator.hpp"
+#include "MModulator.hpp"
 #include "MFinal.hpp"
 
 #define C1 32.703
@@ -21,25 +25,88 @@
 
 TestSynth::TestSynth()
 {
-    auto oscillator = new MOscillator(C1 * 7.0);
-    auto oscillator2 = new MOscillator(C1 * 7.1);
-    auto oscillator3 = new MOscillator(C1 * 7.0);
-    auto adder = new MAdder();
-    auto finalAdder = new MAdder();
+    /* Basic Sine Waves */
+    auto oscillator = new MOscillator(220.0);
     auto final = new MFinal();
     
-    this->addModule(oscillator);
-    this->addModule(oscillator2);
-    this->addModule(oscillator3);
-    this->addModule(adder);
-    this->addModule(finalAdder);
-    this->addModule(final);
-
-    this->connectModules(oscillator, adder, "wave1");
-    this->connectModules(oscillator2, adder, "wave2");
-    this->connectModules(adder, finalAdder, "wave1");
-    this->connectModules(oscillator3, finalAdder, "wave2");
-    this->connectModules(finalAdder, final, "data");
+    addModule(oscillator);
+    addModule(final);
+    
+    connectModules(oscillator, final, "data");
+    
+//    /* Frequency Modulated Beats */
+//    auto fm = new MModulator(2.0, 440.0, 25.0);
+//    auto fm2 = new MModulator(2.0, 460.0, 25.0);
+//    auto adder = new MAdder();
+//    auto final = new MFinal();
+//    
+//    addModule(fm);
+//    addModule(fm2);
+//    addModule(adder);
+//    addModule(final);
+//    
+//    connectModules(fm, adder, "wave1");
+//    connectModules(fm2, adder, "wave2");
+//    connectModules(adder, final, "data");
+    
+//    /* Triads Testing */
+//    auto triads = new MTriadGenerator(C1 * 7.0, E1 * 7.0, G1 * 7.0);
+//    auto final = new MFinal();
+//    
+//    addModule(triads);
+//    addModule(final);
+//    
+//    connectModules(triads, final, "data");
+    
+//    /* Low Pass Filtered White Noise */
+//    auto noise = new MWhiteNoiseGenerator();
+//    auto lpFilter = new MLowPassFilter();
+//    auto final = new MFinal();
+//    
+//    addModule(noise);
+//    addModule(lpFilter);
+//    addModule(final);
+//    
+//    connectModules(noise, lpFilter, "data");
+//    connectModules(lpFilter, final, "data");
+    
+//    /* Additive Synthesis */
+//    auto noise = new MWhiteNoiseGenerator();
+//    auto oscillator = new MOscillator(C1 * 7.0);
+//    auto oscillator2 = new MOscillator(E1 * 7.0);
+//    auto oscillator3 = new MOscillator(G1 * 7.0);
+//    auto adder = new MAdder();
+//    auto finalAdder = new MAdder();
+//    auto betaOscillator = new MOscillator(1.0);
+//    auto lpFilter = new MLowPassFilter();
+//    auto final = new MFinal();
+//    
+//    noise->setEnabled(true);
+//    oscillator->setEnabled(true);
+//    oscillator2->setEnabled(true);
+//    oscillator3->setEnabled(true);
+//    adder->setEnabled(true);
+//    finalAdder->setEnabled(true);
+//    betaOscillator->setEnabled(true);
+//    lpFilter->setEnabled(true);
+//    final->setEnabled(true);
+//    
+//    this->addModule(oscillator);
+//    this->addModule(oscillator2);
+//    this->addModule(oscillator3);
+//    this->addModule(adder);
+//    this->addModule(finalAdder);
+//    this->addModule(betaOscillator);
+//    this->addModule(lpFilter);
+//    this->addModule(final);
+//
+//    this->connectModules(oscillator, adder, "wave1");
+//    this->connectModules(oscillator2, adder, "wave2");
+//    this->connectModules(adder, finalAdder, "wave1");
+//    this->connectModules(oscillator3, finalAdder, "wave2");
+//    this->connectModules(finalAdder, lpFilter, "data");
+//    this->connectModules(betaOscillator, lpFilter, "beta");
+//    this->connectModules(lpFilter, final, "data");
 }
 
 TestSynth::~TestSynth()

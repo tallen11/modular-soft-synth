@@ -14,14 +14,12 @@ MOscillator::MOscillator()
 {
     this->hasOutput();
     this->frequency = 440.0;
-    this->lastIndex = 0;
 }
 
 MOscillator::MOscillator(double frequency)
 {
     this->hasOutput();
     this->frequency = frequency;
-    this->lastIndex = 0;
 }
 
 MOscillator::~MOscillator()
@@ -31,11 +29,18 @@ MOscillator::~MOscillator()
 
 void MOscillator::update()
 {
-    // Test data for now
-    while (this->output->getBufferSize() < MAX_BUFFER_SIZE) {
-        double dx = (double)lastIndex / SAMPLE_RATE;
-        double data = sin(2 * M_PI * this->frequency * dx);
-        this->output->writeData(data);
-        lastIndex++;
-    }    
+    while (output->getBufferSize() < MAX_BUFFER_SIZE) {
+        if (isEnabled()) {
+            double dx = ((double)currentTime / SAMPLE_RATE);
+            double data = envelopeCoeff(dx) * sin(2.0 * M_PI * frequency * dx);
+            output->writeData(data);
+            
+            currentTime++;
+            if (currentTime == INT64_MAX) {
+                currentTime = 0;
+            }
+        } else {
+            output->writeData(0.0);
+        }
+    }
 }

@@ -19,9 +19,8 @@ public:
     ~MOscillator();
     void update();
     
-private:
+private:    
     double frequency;
-    int lastIndex;
 };
 
 #endif /* MOscillator_hpp */

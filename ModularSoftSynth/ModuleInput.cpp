@@ -43,6 +43,10 @@ bool ModuleInput::canRead()
 
 size_t ModuleInput::getBufferSize()
 {
+    if (this->dataBuffer == nullptr) {
+        return 0;
+    }
+    
     return this->dataBuffer->getSize();
 }
 
