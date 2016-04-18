@@ -38,20 +38,19 @@ TestSynth::TestSynth()
 //    connectModules(oscillator, final, "left");
 
     /* Basic Sine Waves w/ Display */
-    auto x = new MOscillator(440.0);
-    auto y = new MOscillator(440.0, M_PI/2.0);
+    auto x = new MOscillator(220.0);
+    auto y = new MOscillator(10000.0);
+    auto adder = new MAdder();
     auto display = new MDisplay();
-//    auto final = new MFinal();
     
     addModule(x);
     addModule(y);
+    addModule(adder);
     addModule(display);
-//    addModule(final);
     
-    
-//    connectModules(y, final, "data");
-    connectModules(y, display, "left");
-    connectModules(x, display, "right");
+    connectModules(x, adder, "wave1");
+    connectModules(y, adder, "wave2");
+    connectModules(adder, display, "left");
 
     
 //    /* FM Sound */

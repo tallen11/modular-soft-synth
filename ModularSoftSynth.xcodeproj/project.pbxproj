@@ -11,6 +11,7 @@
 		A4680FE11CC46D3200888D9C /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4680FE01CC46D3200888D9C /* OpenGL.framework */; };
 		A4680FE41CC46E1E00888D9C /* MDisplay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4680FE21CC46E1E00888D9C /* MDisplay.cpp */; };
 		A4680FE71CC485AD00888D9C /* libglfw3.3.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A4680FE51CC4809F00888D9C /* libglfw3.3.1.dylib */; };
+		A4680FEA1CC4A26300888D9C /* libfftw3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A4680FE91CC4A26300888D9C /* libfftw3.a */; };
 		A48667831CB5845100310C29 /* MValue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A48667811CB5845100310C29 /* MValue.cpp */; };
 		A48667861CB5CA5700310C29 /* MAdder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A48667841CB5CA5700310C29 /* MAdder.cpp */; };
 		A4B434BA1CBC8AD800EF7A75 /* MLowPassFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4B434B81CBC8AD800EF7A75 /* MLowPassFilter.cpp */; };
@@ -53,6 +54,8 @@
 		A4680FE31CC46E1E00888D9C /* MDisplay.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = MDisplay.hpp; sourceTree = "<group>"; };
 		A4680FE51CC4809F00888D9C /* libglfw3.3.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libglfw3.3.1.dylib; path = ../../../../../usr/local/Cellar/glfw3/3.1.2/lib/libglfw3.3.1.dylib; sourceTree = "<group>"; };
 		A4680FE81CC485C500888D9C /* glfw3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = glfw3.h; path = ../../../../../usr/local/Cellar/glfw3/3.1.2/include/GLFW/glfw3.h; sourceTree = "<group>"; };
+		A4680FE91CC4A26300888D9C /* libfftw3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libfftw3.a; path = ../../../../../usr/local/Cellar/fftw/3.3.4_1/lib/libfftw3.a; sourceTree = "<group>"; };
+		A4680FEB1CC4A27F00888D9C /* fftw3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = fftw3.h; path = ../../../../../usr/local/Cellar/fftw/3.3.4_1/include/fftw3.h; sourceTree = "<group>"; };
 		A48667801CB5825200310C29 /* TSQueue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSQueue.h; sourceTree = "<group>"; };
 		A48667811CB5845100310C29 /* MValue.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MValue.cpp; sourceTree = "<group>"; };
 		A48667821CB5845100310C29 /* MValue.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = MValue.hpp; sourceTree = "<group>"; };
@@ -95,6 +98,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A4680FEA1CC4A26300888D9C /* libfftw3.a in Frameworks */,
 				A4680FE71CC485AD00888D9C /* libglfw3.3.1.dylib in Frameworks */,
 				A4680FE11CC46D3200888D9C /* OpenGL.framework in Frameworks */,
 				A4F610AB1CB4D1D1009A6F88 /* Carbon.framework in Frameworks */,
@@ -120,6 +124,7 @@
 		A4F6106B1CB49E87009A6F88 = {
 			isa = PBXGroup;
 			children = (
+				A4680FEB1CC4A27F00888D9C /* fftw3.h */,
 				A4680FE81CC485C500888D9C /* glfw3.h */,
 				A4F610AE1CB4D1F9009A6F88 /* Frameworks */,
 				A4F610A11CB4CD32009A6F88 /* portaudio.h */,
@@ -209,6 +214,7 @@
 		A4F610AE1CB4D1F9009A6F88 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A4680FE91CC4A26300888D9C /* libfftw3.a */,
 				A4680FE51CC4809F00888D9C /* libglfw3.3.1.dylib */,
 				A4680FE01CC46D3200888D9C /* OpenGL.framework */,
 				A4680FDE1CC46D2900888D9C /* GLUT.framework */,
@@ -387,6 +393,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					/usr/local/lib/,
 					/usr/local/Cellar/glfw3/3.1.2/lib,
+					/usr/local/Cellar/fftw/3.3.4_1/lib,
 				);
 				OTHER_CPLUSPLUSFLAGS = (
 					"$(OTHER_CFLAGS)",
@@ -405,6 +412,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					/usr/local/lib/,
 					/usr/local/Cellar/glfw3/3.1.2/lib,
+					/usr/local/Cellar/fftw/3.3.4_1/lib,
 				);
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";

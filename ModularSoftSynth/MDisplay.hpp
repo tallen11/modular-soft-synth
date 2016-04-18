@@ -10,8 +10,9 @@
 #define MDisplay_hpp
 
 #include "Module.hpp"
-#include <GLUT/glut.h>
+#include <cmath>
 #include "glfw3.h"
+#include "fftw3.h"
 
 class MDisplay : public Module {
     
@@ -27,6 +28,13 @@ private:
     ModuleInput *leftChannelInput;
     ModuleInput *rightChannelInput;
     GLFWwindow *window;
+    
+    double freqs[MAX_BUFFER_SIZE/2];
 };
+
+inline double hanningWindow(int x)
+{
+    return 0.5 * (1.0 - cos((2.0 * M_PI * x) / (MAX_BUFFER_SIZE - 1.0)));
+}
 
 #endif /* MDisplay_hpp */
