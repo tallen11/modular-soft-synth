@@ -10,11 +10,14 @@
 #define Shaders_hpp
 
 #include <string>
+#include "glfw3.h"
 
 class Shaders {
     
 public:
     static std::string loadShaderCode(const std::string &filePath);
+    static GLuint compileShaderCode(const std::string &code, GLenum type);
+    static GLuint createShaderProgram(const std::string &vertexShaderCode, const std::string &fragmentShaderCode);
 };
 
 #endif /* Shaders_hpp */
