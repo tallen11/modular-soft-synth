@@ -25,16 +25,18 @@ MTriadGenerator::~MTriadGenerator()
 
 void MTriadGenerator::update()
 {
-    while (this->output->getBufferSize() < MAX_BUFFER_SIZE) {
+    while (getBufferSize() < MAX_BUFFER_SIZE) {
         if (isEnabled()) {
             double dx = ((double)lastIndex / SAMPLE_RATE);
             double data = sin(2.0 * M_PI * this->freq1 * dx);
             data += sin(2.0 * M_PI * this->freq2 * dx);
             data += sin(2.0 * M_PI * this->freq3 * dx);
-            this->output->writeData(data);
+            writeToOutputs(data);
+//            this->output->writeData(data);
             lastIndex++;
         } else {
-            this->output->writeData(0.0);
+            writeToOutputs(0.0);
+//            this->output->writeData(0.0);
         }
     }
 }

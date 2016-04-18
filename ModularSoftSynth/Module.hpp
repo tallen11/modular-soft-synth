@@ -11,6 +11,7 @@
 
 #include <vector>
 #include <string>
+#include <iostream>
 #include "ModuleInput.hpp"
 #include "ModuleOutput.hpp"
 
@@ -25,7 +26,7 @@ public:
     virtual void update() = 0;
     
     void hasInputs() { this->inputs = new std::vector<ModuleInput*>(); };
-    void hasOutput() { this->output = new ModuleOutput(); };
+    void hasOutput() { this->outputs = new std::vector<ModuleOutput*>(); };
     
     ModuleInput* createInput(const std::string &name) {
         auto input = new ModuleInput(name);
@@ -33,8 +34,10 @@ public:
         return input;
     };
     
-    ModuleOutput* getOutput() {
-        return this->output;
+    ModuleOutput* createOutput() {
+        ModuleOutput *output = new ModuleOutput();
+        this->outputs->push_back(output);
+        return output;
     }
     
     ModuleInput* getInputNamed(const std::string &name) {
@@ -46,6 +49,19 @@ public:
         
         return nullptr;
     };
+    
+    size_t getBufferSize()
+    {
+        auto out = static_cast<ModuleOutput*>(outputs->front());
+        return out->getBufferSize();
+    }
+    
+    void writeToOutputs(double data)
+    {
+        for (auto out : *this->outputs) {
+            out->writeData(data);
+        }
+    }
     
     inline double envelopeCoeff(double dx)
     {
@@ -70,7 +86,7 @@ public:
     
 protected:
     std::vector<ModuleInput*> *inputs = nullptr;
-    ModuleOutput *output = nullptr;
+    std::vector<ModuleOutput*> *outputs = nullptr;
     bool enabled = true;
     uint64_t currentTime = 0;
 };

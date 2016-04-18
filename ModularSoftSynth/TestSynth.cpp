@@ -16,6 +16,7 @@
 #include "MModulator.hpp"
 #include "MFinal.hpp"
 #include "MDisplay.hpp"
+#include "MWavPlayer.hpp"
 #include <cmath>
 
 #define C1 32.703
@@ -37,21 +38,26 @@ TestSynth::TestSynth()
 //    
 //    connectModules(oscillator, final, "left");
 
-    /* Basic Sine Waves w/ Display */
-    auto x = new MOscillator(220.0);
-    auto y = new MOscillator(10000.0);
-    auto adder = new MAdder();
+    /* Wav Files w/ Display */
+    auto player = new MWavPlayer("/Users/tateallen/Desktop/loop1.wav", 2);
+    auto lpfOscillator = new MOscillator(0.25);
+    auto lpf = new MLowPassFilter();
+    auto final = new MFinal();
     auto display = new MDisplay();
     
-    addModule(x);
-    addModule(y);
-    addModule(adder);
+    lpfOscillator->setEnabled(false);
+    lpf->setEnabled(false);
+    
+    addModule(player);
+    addModule(lpfOscillator);
+    addModule(lpf);
+    addModule(final);
     addModule(display);
     
-    connectModules(x, adder, "wave1");
-    connectModules(y, adder, "wave2");
-    connectModules(adder, display, "left");
-
+    connectModules(lpfOscillator, lpf, "beta");
+    connectModules(player, lpf, "data");
+    connectModules(lpf, final, "left");
+    connectModules(lpf, display, "left");
     
 //    /* FM Sound */
 //    double carrier = 440.0;
@@ -67,7 +73,7 @@ TestSynth::TestSynth()
 //    
 //    connectModules(alphaValue, fm, "alpha");
 //    connectModules(betaValue, fm, "beta");
-//    connectModules(fm, final, "data");
+//    connectModules(fm, final, "left");
     
 //    /* Frequency Modulated Beats */
 //    auto fm = new MModulator(2.0, 440.0, 25.0);
@@ -82,7 +88,7 @@ TestSynth::TestSynth()
 //    
 //    connectModules(fm, adder, "wave1");
 //    connectModules(fm2, adder, "wave2");
-//    connectModules(adder, final, "data");
+//    connectModules(adder, final, "left");
     
 //    /* FM Sound with Modified Coefficients */
 //    auto osc = new MOscillator(0.5);
@@ -97,7 +103,7 @@ TestSynth::TestSynth()
 //    
 //    connectModules(osc, fm, "alpha");
 //    connectModules(osc2, fm, "beta");
-//    connectModules(fm, final, "data");
+//    connectModules(fm, final, "left");
     
 //    /* FM with Value Coefficient */
 //    auto value = new MValue(1.0);
@@ -109,7 +115,7 @@ TestSynth::TestSynth()
 //    addModule(final);
 //    
 //    connectModules(value, fm, "beta");
-//    connectModules(fm, final, "data");
+//    connectModules(fm, final, "left");
     
 //    /* Triads Testing */
 //    auto triads = new MTriadGenerator(C1 * 7.0, E1 * 7.0, G1 * 7.0);
@@ -118,7 +124,7 @@ TestSynth::TestSynth()
 //    addModule(triads);
 //    addModule(final);
 //    
-//    connectModules(triads, final, "data");
+//    connectModules(triads, final, "left");
     
 //    /* Low Pass Filtered White Noise */
 //    auto noise = new MWhiteNoiseGenerator();
@@ -132,7 +138,7 @@ TestSynth::TestSynth()
 //    addModule(final);
 //    
 //    connectModules(noise, lpFilter, "data");
-//    connectModules(lpFilter, final, "data");
+//    connectModules(lpFilter, final, "left");
     
 //    /* Additive Synthesis */
 //    auto noise = new MWhiteNoiseGenerator();
@@ -170,7 +176,7 @@ TestSynth::TestSynth()
 //    this->connectModules(oscillator3, finalAdder, "wave2");
 //    this->connectModules(finalAdder, lpFilter, "data");
 //    this->connectModules(betaOscillator, lpFilter, "beta");
-//    this->connectModules(lpFilter, final, "data");
+//    this->connectModules(lpFilter, final, "left");
 }
 
 TestSynth::~TestSynth()

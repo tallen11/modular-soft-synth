@@ -48,7 +48,7 @@ void Synth::removeModule(Module *module)
 
 void Synth::connectModules(Module *outputModule, Module *inputModule, const std::string &inputName)
 {
-    auto output = outputModule->getOutput();
+    auto output = outputModule->createOutput();
     auto input = inputModule->getInputNamed(inputName);
     auto dataBuffer = new ModuleDataBuffer(); // TODO: Delete this somewhere...
     output->setDataBuffer(dataBuffer);

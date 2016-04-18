@@ -20,12 +20,17 @@ int MFinal::callback(const void *input, void *output, unsigned long frameCount, 
     auto out = static_cast<float*>(output);
     for (unsigned long i = 0; i < frameCount; ++i) {
 //        out[i] = dataInput->readData();
-        double leftData = leftInput->readData();
-        *out++ = leftData;
-        if (rightInput->canRead()) {
-            *out++ = rightInput->readData();
-        } else {
+        if (leftInput->canRead()) {
+            double leftData = leftInput->readData();
             *out++ = leftData;
+            if (rightInput->canRead()) {
+                *out++ = rightInput->readData();
+            } else {
+                *out++ = leftData;
+            }
+        } else {
+            *out++ = 0.0f;
+            *out++ = 0.0f;
         }
     }
     

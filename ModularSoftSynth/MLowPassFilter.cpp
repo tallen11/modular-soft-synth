@@ -35,18 +35,20 @@ void MLowPassFilter::update()
         for (int i = 0; i < bufferSize; ++i) {
             float beta = 0.007;
             if (betaInput->canRead()) {
-                beta = (1.0 * betaInput->readData() + 1.5) / 2.0;
+                beta = (0.5 * betaInput->readData() + 0.5);
             }
             
             float delayedSample = (i - 1) < 0 ? lastSample : data[i - 1];
             data[i] = beta * data[i] + (1.0 - beta) * delayedSample;
-            output->writeData(data[i]);
+            writeToOutputs(data[i]);
+//            output->writeData(data[i]);
         }
         
         lastSample = data[bufferSize - 1];
     } else {
         for (int i = 0; i < MAX_BUFFER_SIZE; ++i) {
-            output->writeData(dataInput->readData());
+            writeToOutputs(dataInput->readData());
+//            output->writeData(dataInput->readData());
         }
     }
 }

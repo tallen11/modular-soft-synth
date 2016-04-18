@@ -37,11 +37,12 @@ MOscillator::~MOscillator()
 
 void MOscillator::update()
 {
-    while (output->getBufferSize() < MAX_BUFFER_SIZE) {
+    while (getBufferSize() < MAX_BUFFER_SIZE) {
         if (isEnabled()) {
             double dx = ((double)currentTime / SAMPLE_RATE);
             double data = envelopeCoeff(dx) * sin(2.0 * M_PI * frequency * dx + phaseOffset);
-            output->writeData(data);
+            writeToOutputs(data);
+//            output->writeData(data);
             
 //            std::cout << data << std::endl;
             
@@ -50,7 +51,8 @@ void MOscillator::update()
                 currentTime = 0;
             }
         } else {
-            output->writeData(0.0);
+            writeToOutputs(0.0);
+//            output->writeData(0.0);
         }
     }
 }

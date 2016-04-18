@@ -21,11 +21,13 @@ MValue::~MValue()
 
 void MValue::update()
 {
-    while (this->output->getBufferSize() < MAX_BUFFER_SIZE) {
+    while (getBufferSize() < MAX_BUFFER_SIZE) {
         if (isEnabled()) {
-            this->output->writeData(this->value);
+            writeToOutputs(value);
+//            this->output->writeData(this->value);
         } else {
-            this->output->writeData(0.0);
+            writeToOutputs(0.0);
+//            this->output->writeData(0.0);
         }
     }
 }

@@ -29,9 +29,11 @@ void MAdder::update()
         double data1 = wave1Input->readData();
         if (isEnabled()) {
             double data2 = wave2Input->readData();
-            output->writeData((data1 + data2) / 2.0);
+            writeToOutputs((data1 + data2) / 2.0);
+//            output->writeData((data1 + data2) / 2.0);
         } else {
-            output->writeData(data1);
+            writeToOutputs(data1);
+//            output->writeData(data1);
         }
     }
 }

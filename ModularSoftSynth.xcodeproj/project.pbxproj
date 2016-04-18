@@ -12,6 +12,8 @@
 		A4680FE41CC46E1E00888D9C /* MDisplay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4680FE21CC46E1E00888D9C /* MDisplay.cpp */; };
 		A4680FE71CC485AD00888D9C /* libglfw3.3.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A4680FE51CC4809F00888D9C /* libglfw3.3.1.dylib */; };
 		A4680FEA1CC4A26300888D9C /* libfftw3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A4680FE91CC4A26300888D9C /* libfftw3.a */; };
+		A4680FF01CC4B72E00888D9C /* MWavPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4680FEE1CC4B72E00888D9C /* MWavPlayer.cpp */; };
+		A4680FF21CC4BA4200888D9C /* libsndfile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A4680FF11CC4BA4200888D9C /* libsndfile.a */; };
 		A48667831CB5845100310C29 /* MValue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A48667811CB5845100310C29 /* MValue.cpp */; };
 		A48667861CB5CA5700310C29 /* MAdder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A48667841CB5CA5700310C29 /* MAdder.cpp */; };
 		A4B434BA1CBC8AD800EF7A75 /* MLowPassFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4B434B81CBC8AD800EF7A75 /* MLowPassFilter.cpp */; };
@@ -56,6 +58,11 @@
 		A4680FE81CC485C500888D9C /* glfw3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = glfw3.h; path = ../../../../../usr/local/Cellar/glfw3/3.1.2/include/GLFW/glfw3.h; sourceTree = "<group>"; };
 		A4680FE91CC4A26300888D9C /* libfftw3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libfftw3.a; path = ../../../../../usr/local/Cellar/fftw/3.3.4_1/lib/libfftw3.a; sourceTree = "<group>"; };
 		A4680FEB1CC4A27F00888D9C /* fftw3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = fftw3.h; path = ../../../../../usr/local/Cellar/fftw/3.3.4_1/include/fftw3.h; sourceTree = "<group>"; };
+		A4680FED1CC4B6D000888D9C /* WavReader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WavReader.h; sourceTree = "<group>"; };
+		A4680FEE1CC4B72E00888D9C /* MWavPlayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MWavPlayer.cpp; sourceTree = "<group>"; };
+		A4680FEF1CC4B72E00888D9C /* MWavPlayer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = MWavPlayer.hpp; sourceTree = "<group>"; };
+		A4680FF11CC4BA4200888D9C /* libsndfile.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libsndfile.a; path = ../../../../../usr/local/Cellar/libsndfile/1.0.26/lib/libsndfile.a; sourceTree = "<group>"; };
+		A4680FF31CC4BA5400888D9C /* sndfile.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = sndfile.hh; path = ../../../../../usr/local/Cellar/libsndfile/1.0.26/include/sndfile.hh; sourceTree = "<group>"; };
 		A48667801CB5825200310C29 /* TSQueue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSQueue.h; sourceTree = "<group>"; };
 		A48667811CB5845100310C29 /* MValue.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MValue.cpp; sourceTree = "<group>"; };
 		A48667821CB5845100310C29 /* MValue.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = MValue.hpp; sourceTree = "<group>"; };
@@ -98,6 +105,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A4680FF21CC4BA4200888D9C /* libsndfile.a in Frameworks */,
 				A4680FEA1CC4A26300888D9C /* libfftw3.a in Frameworks */,
 				A4680FE71CC485AD00888D9C /* libglfw3.3.1.dylib in Frameworks */,
 				A4680FE11CC46D3200888D9C /* OpenGL.framework in Frameworks */,
@@ -113,6 +121,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A4680FEC1CC4B6C200888D9C /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				A4680FED1CC4B6D000888D9C /* WavReader.h */,
+			);
+			name = Util;
+			sourceTree = "<group>";
+		};
 		A486677F1CB5823000310C29 /* External */ = {
 			isa = PBXGroup;
 			children = (
@@ -124,6 +140,7 @@
 		A4F6106B1CB49E87009A6F88 = {
 			isa = PBXGroup;
 			children = (
+				A4680FF31CC4BA5400888D9C /* sndfile.hh */,
 				A4680FEB1CC4A27F00888D9C /* fftw3.h */,
 				A4680FE81CC485C500888D9C /* glfw3.h */,
 				A4F610AE1CB4D1F9009A6F88 /* Frameworks */,
@@ -144,6 +161,7 @@
 		A4F610761CB49E87009A6F88 /* ModularSoftSynth */ = {
 			isa = PBXGroup;
 			children = (
+				A4680FEC1CC4B6C200888D9C /* Util */,
 				A486677F1CB5823000310C29 /* External */,
 				A4F610961CB4B94E009A6F88 /* Test */,
 				A4F610881CB4A63D009A6F88 /* Synths */,
@@ -176,6 +194,8 @@
 				A44255031CBDA96800F9FAC0 /* MModulator.cpp */,
 				A4680FE31CC46E1E00888D9C /* MDisplay.hpp */,
 				A4680FE21CC46E1E00888D9C /* MDisplay.cpp */,
+				A4680FEF1CC4B72E00888D9C /* MWavPlayer.hpp */,
+				A4680FEE1CC4B72E00888D9C /* MWavPlayer.cpp */,
 			);
 			name = Modules;
 			sourceTree = "<group>";
@@ -214,6 +234,7 @@
 		A4F610AE1CB4D1F9009A6F88 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A4680FF11CC4BA4200888D9C /* libsndfile.a */,
 				A4680FE91CC4A26300888D9C /* libfftw3.a */,
 				A4680FE51CC4809F00888D9C /* libglfw3.3.1.dylib */,
 				A4680FE01CC46D3200888D9C /* OpenGL.framework */,
@@ -291,6 +312,7 @@
 				A4F610841CB4A0B8009A6F88 /* MOscillator.cpp in Sources */,
 				A4680FE41CC46E1E00888D9C /* MDisplay.cpp in Sources */,
 				A44255051CBDA96800F9FAC0 /* MModulator.cpp in Sources */,
+				A4680FF01CC4B72E00888D9C /* MWavPlayer.cpp in Sources */,
 				A48667861CB5CA5700310C29 /* MAdder.cpp in Sources */,
 				A4F6108C1CB4A87D009A6F88 /* ModuleDataBuffer.cpp in Sources */,
 				A4F610921CB4ADD1009A6F88 /* ModuleInput.cpp in Sources */,
@@ -394,6 +416,7 @@
 					/usr/local/lib/,
 					/usr/local/Cellar/glfw3/3.1.2/lib,
 					/usr/local/Cellar/fftw/3.3.4_1/lib,
+					/usr/local/Cellar/libsndfile/1.0.26/lib,
 				);
 				OTHER_CPLUSPLUSFLAGS = (
 					"$(OTHER_CFLAGS)",
@@ -413,6 +436,7 @@
 					/usr/local/lib/,
 					/usr/local/Cellar/glfw3/3.1.2/lib,
 					/usr/local/Cellar/fftw/3.3.4_1/lib,
+					/usr/local/Cellar/libsndfile/1.0.26/lib,
 				);
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";

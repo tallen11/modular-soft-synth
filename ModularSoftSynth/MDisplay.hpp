@@ -29,6 +29,9 @@ private:
     ModuleInput *rightChannelInput;
     GLFWwindow *window;
     
+    fftw_complex *fftInputBuffer;
+    fftw_complex *fftOutputBuffer;
+    fftw_plan plan;
     double freqs[MAX_BUFFER_SIZE/2];
 };
 
