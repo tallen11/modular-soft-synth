@@ -8,49 +8,43 @@
 
 #include "MWavPlayer.hpp"
 
-MWavPlayer::MWavPlayer(const std::string &filePath, int loops)
+MWavPlayer::MWavPlayer(const std::string &filePath)
 {
     hasOutput();
-    this->loops = loops;
     
-    SNDFILE *sf;
+    SNDFILE *file;
     SF_INFO info;
-    int num;
-    int f,sr;
-    int i,j;
-    FILE *out;
     
     /* Open the WAV file. */
     info.format = 0;
-    sf = sf_open(filePath.c_str(), SFM_READ, &info);
-    if (sf == NULL)
-    {
+    file = sf_open(filePath.c_str(), SFM_READ, &info);
+    if (file == NULL) {
         printf("Failed to open the file.\n");
         exit(-1);
     }
     
-    /* Print some of the info, and figure out how much data to read. */
-    f = info.frames;
-    sr = info.samplerate;
+    sf_count_t frameCount = info.frames;
+//    int sampleRate = info.samplerate;
     channelCount = info.channels;
-    printf("frames=%d\n",f);
-    printf("samplerate=%d\n",sr);
-    printf("channels=%d\n", channelCount);
-    sampleCount = f * channelCount;
-    printf("num_items=%d\n", sampleCount);
     
-    /* Allocate space for the data to be read, then read it. */
-    buffer = (double*)malloc(sampleCount * sizeof(double));
+//    printf("frames: %lld\n", frameCount);
+//    printf("samplerate: %d\n", sampleRate);
+//    printf("channels: %d\n", channelCount);
     
-    num = sf_read_double(sf, buffer, sampleCount);
-    sf_close(sf);
+    sampleCount = frameCount * channelCount;
+//    printf("num_items: %lld\n", sampleCount);
     
-    printf("Read %d items\n",num);
+    buffer = new double[sampleCount];
+    
+    sf_read_double(file, buffer, sampleCount);
+    sf_close(file);
+    
+//    printf("Read %lld items\n", num);
 }
 
 MWavPlayer::~MWavPlayer()
 {
-    
+    delete [] buffer;
 }
 
 void MWavPlayer::update()

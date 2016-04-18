@@ -39,7 +39,7 @@ TestSynth::TestSynth()
 //    connectModules(oscillator, final, "left");
 
     /* Wav Files w/ Display */
-    auto player = new MWavPlayer("/Users/tateallen/Desktop/loop1.wav", 2);
+    auto player = new MWavPlayer("/Users/tateallen/Desktop/loop1.wav");
     auto lpfOscillator = new MOscillator(0.25);
     auto lpf = new MLowPassFilter();
     auto final = new MFinal();

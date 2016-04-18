@@ -7,6 +7,7 @@
 //
 
 #include "MDisplay.hpp"
+#include "Shaders.hpp"
 #include <iostream>
 
 #define WIDTH 512.0
@@ -18,6 +19,8 @@ MDisplay::MDisplay()
     hasInputs();
     leftChannelInput = createInput("left");
     rightChannelInput = createInput("right");
+    
+//    Shaders::loadShaderCode("/Users/tateallen/Documents/DigitalAudio/ModularSoftSynth/ModularSoftSynth/vertex.glsl");
     
     fftInputBuffer = (fftw_complex*)fftw_malloc(sizeof(fftw_complex) * MAX_BUFFER_SIZE);
     fftOutputBuffer = (fftw_complex*)fftw_malloc(sizeof(fftw_complex) * MAX_BUFFER_SIZE);
