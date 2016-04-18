@@ -13,7 +13,7 @@
 int main(int argc, const char * argv[]) {
     
     auto synth = TestSynth();
-    while (true) {
+    for (;;) {
         synth.update();
     }
     

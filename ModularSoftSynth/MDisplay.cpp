@@ -44,8 +44,19 @@ MDisplay::~MDisplay()
     fftw_free(fftOutputBuffer);
 }
 
+//static double lastTime = glfwGetTime();
+//static int frames = 0;
+
 void MDisplay::update()
 {
+//    frames++;
+//    double time = glfwGetTime();
+//    if (time - lastTime >= 1.0) {
+//        std::cout << 1000.0 / frames << " ms/f, " << frames / 1.0 << " fps" << std::endl;
+//        lastTime = time;
+//        frames = 0;
+//    }
+    
     if (!leftChannelInput->canRead()) {
         return;
     }
@@ -101,25 +112,4 @@ void MDisplay::update()
     
     glfwSwapBuffers(window);
     glfwPollEvents();
-    
-//    if (leftChannelInput->canRead() && rightChannelInput->canRead() && !glfwWindowShouldClose(window)) {
-//        
-//        glClear(GL_COLOR_BUFFER_BIT);
-//        
-//        if (leftChannelInput->canRead() && rightChannelInput->canRead()) {
-//            glColor3f(1.f, 0.f, 0.f);
-//            glPointSize(10.0);
-//            
-//            glBegin(GL_POINTS);
-//        
-//            double dataLeft = (WIDTH - 25.0) * leftChannelInput->readData();
-//            double dataRight = (HEIGHT - 25.0) * rightChannelInput->readData();
-//            glVertex3d(dataLeft / WIDTH, dataRight / HEIGHT, 0.0);
-//            
-//            glEnd();
-//            
-//            glfwSwapBuffers(window);
-//            glfwPollEvents();
-//        }
-//    }
 }
