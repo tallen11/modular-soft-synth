@@ -9,17 +9,24 @@
 #ifndef ModuleInput_hpp
 #define ModuleInput_hpp
 
-#include <queue>
+#include <string>
+#include "ModuleDataBuffer.hpp"
 
 class ModuleInput {
     
 public:
-    ModuleInput();
+    ModuleInput(const std::string &name);
+    ModuleInput(const std::string &name, ModuleDataBuffer *inputDataBuffer);
     ~ModuleInput();
-    void writeData(double data);
+    const std::string& getName();
+    void setDataBuffer(ModuleDataBuffer *inputDataBuffer);
+    bool canRead();
+    size_t getBufferSize();
+    double readData();
     
 private:
-    std::queue<double> buffer;
+    std::string name;
+    ModuleDataBuffer *dataBuffer;
 };
 
 #endif /* ModuleInput_hpp */

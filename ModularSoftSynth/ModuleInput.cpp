@@ -7,3 +7,51 @@
 //
 
 #include "ModuleInput.hpp"
+#include <cassert>
+
+ModuleInput::ModuleInput(const std::string &name)
+{
+    this->name = name;
+    this->dataBuffer = nullptr;
+}
+
+ModuleInput::ModuleInput(const std::string &name, ModuleDataBuffer *inputDataBuffer)
+{
+    this->name = name;
+    this->setDataBuffer(inputDataBuffer);
+}
+
+ModuleInput::~ModuleInput()
+{
+    
+}
+
+const std::string& ModuleInput::getName()
+{
+    return this->name;
+}
+
+void ModuleInput::setDataBuffer(ModuleDataBuffer *inputDataBuffer)
+{
+    this->dataBuffer = inputDataBuffer;
+}
+
+bool ModuleInput::canRead()
+{
+    return this->dataBuffer != nullptr && this->dataBuffer->hasData();
+}
+
+size_t ModuleInput::getBufferSize()
+{
+    if (this->dataBuffer == nullptr) {
+        return 0;
+    }
+    
+    return this->dataBuffer->getSize();
+}
+
+double ModuleInput::readData()
+{
+    assert(this->dataBuffer != nullptr);
+    return this->dataBuffer->readData();
+}
