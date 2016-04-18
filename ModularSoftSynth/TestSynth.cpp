@@ -7,6 +7,7 @@
 //
 
 #include "TestSynth.hpp"
+#include "MValue.hpp"
 #include "MOscillator.hpp"
 #include "MWhiteNoiseGenerator.hpp"
 #include "MAdder.hpp"
@@ -14,6 +15,8 @@
 #include "MTriadGenerator.hpp"
 #include "MModulator.hpp"
 #include "MFinal.hpp"
+#include "MDisplay.hpp"
+#include <cmath>
 
 #define C1 32.703
 #define D1 36.708
@@ -25,14 +28,47 @@
 
 TestSynth::TestSynth()
 {
-    /* Basic Sine Waves */
-    auto oscillator = new MOscillator(220.0);
-    auto final = new MFinal();
+//    /* Basic Sine Waves */
+//    auto oscillator = new MOscillator(220.0);
+//    auto final = new MFinal();
+//    
+//    addModule(oscillator);
+//    addModule(final);
+//    
+//    connectModules(oscillator, final, "left");
+
+    /* Basic Sine Waves w/ Display */
+    auto x = new MOscillator(440.0);
+    auto y = new MOscillator(440.0, M_PI/2.0);
+    auto display = new MDisplay();
+//    auto final = new MFinal();
     
-    addModule(oscillator);
-    addModule(final);
+    addModule(x);
+    addModule(y);
+    addModule(display);
+//    addModule(final);
     
-    connectModules(oscillator, final, "data");
+    
+//    connectModules(y, final, "data");
+    connectModules(y, display, "left");
+    connectModules(x, display, "right");
+
+    
+//    /* FM Sound */
+//    double carrier = 440.0;
+//    auto fm = new MModulator(carrier * 1.5, carrier, 1.0);
+//    auto alphaValue = new MValue(0.5);
+//    auto betaValue = new MValue(0.5);
+//    auto final = new MFinal();
+//    
+//    addModule(alphaValue);
+//    addModule(betaValue);
+//    addModule(fm);
+//    addModule(final);
+//    
+//    connectModules(alphaValue, fm, "alpha");
+//    connectModules(betaValue, fm, "beta");
+//    connectModules(fm, final, "data");
     
 //    /* Frequency Modulated Beats */
 //    auto fm = new MModulator(2.0, 440.0, 25.0);
@@ -49,6 +85,33 @@ TestSynth::TestSynth()
 //    connectModules(fm2, adder, "wave2");
 //    connectModules(adder, final, "data");
     
+//    /* FM Sound with Modified Coefficients */
+//    auto osc = new MOscillator(0.5);
+//    auto osc2 = new MOscillator(1.0);
+//    auto fm = new MModulator(2.0, 440.0, 25.0);
+//    auto final = new MFinal();
+//    
+//    addModule(osc);
+//    addModule(osc2);
+//    addModule(fm);
+//    addModule(final);
+//    
+//    connectModules(osc, fm, "alpha");
+//    connectModules(osc2, fm, "beta");
+//    connectModules(fm, final, "data");
+    
+//    /* FM with Value Coefficient */
+//    auto value = new MValue(1.0);
+//    auto fm = new MModulator(2.0, 440.0, 25.0);
+//    auto final = new MFinal();
+//    
+//    addModule(value);
+//    addModule(fm);
+//    addModule(final);
+//    
+//    connectModules(value, fm, "beta");
+//    connectModules(fm, final, "data");
+    
 //    /* Triads Testing */
 //    auto triads = new MTriadGenerator(C1 * 7.0, E1 * 7.0, G1 * 7.0);
 //    auto final = new MFinal();
@@ -62,6 +125,8 @@ TestSynth::TestSynth()
 //    auto noise = new MWhiteNoiseGenerator();
 //    auto lpFilter = new MLowPassFilter();
 //    auto final = new MFinal();
+//    
+//    lpFilter->setEnabled(true);
 //    
 //    addModule(noise);
 //    addModule(lpFilter);

@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		A44255051CBDA96800F9FAC0 /* MModulator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A44255031CBDA96800F9FAC0 /* MModulator.cpp */; };
+		A4680FE11CC46D3200888D9C /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4680FE01CC46D3200888D9C /* OpenGL.framework */; };
+		A4680FE41CC46E1E00888D9C /* MDisplay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4680FE21CC46E1E00888D9C /* MDisplay.cpp */; };
+		A4680FE71CC485AD00888D9C /* libglfw3.3.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A4680FE51CC4809F00888D9C /* libglfw3.3.1.dylib */; };
 		A48667831CB5845100310C29 /* MValue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A48667811CB5845100310C29 /* MValue.cpp */; };
 		A48667861CB5CA5700310C29 /* MAdder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A48667841CB5CA5700310C29 /* MAdder.cpp */; };
 		A4B434BA1CBC8AD800EF7A75 /* MLowPassFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4B434B81CBC8AD800EF7A75 /* MLowPassFilter.cpp */; };
@@ -44,6 +47,12 @@
 /* Begin PBXFileReference section */
 		A44255031CBDA96800F9FAC0 /* MModulator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MModulator.cpp; sourceTree = "<group>"; };
 		A44255041CBDA96800F9FAC0 /* MModulator.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = MModulator.hpp; sourceTree = "<group>"; };
+		A4680FDE1CC46D2900888D9C /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
+		A4680FE01CC46D3200888D9C /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		A4680FE21CC46E1E00888D9C /* MDisplay.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MDisplay.cpp; sourceTree = "<group>"; };
+		A4680FE31CC46E1E00888D9C /* MDisplay.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = MDisplay.hpp; sourceTree = "<group>"; };
+		A4680FE51CC4809F00888D9C /* libglfw3.3.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libglfw3.3.1.dylib; path = ../../../../../usr/local/Cellar/glfw3/3.1.2/lib/libglfw3.3.1.dylib; sourceTree = "<group>"; };
+		A4680FE81CC485C500888D9C /* glfw3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = glfw3.h; path = ../../../../../usr/local/Cellar/glfw3/3.1.2/include/GLFW/glfw3.h; sourceTree = "<group>"; };
 		A48667801CB5825200310C29 /* TSQueue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSQueue.h; sourceTree = "<group>"; };
 		A48667811CB5845100310C29 /* MValue.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MValue.cpp; sourceTree = "<group>"; };
 		A48667821CB5845100310C29 /* MValue.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = MValue.hpp; sourceTree = "<group>"; };
@@ -86,6 +95,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A4680FE71CC485AD00888D9C /* libglfw3.3.1.dylib in Frameworks */,
+				A4680FE11CC46D3200888D9C /* OpenGL.framework in Frameworks */,
 				A4F610AB1CB4D1D1009A6F88 /* Carbon.framework in Frameworks */,
 				A4F610A91CB4D1CC009A6F88 /* CoreServices.framework in Frameworks */,
 				A4F610A71CB4D1C5009A6F88 /* AudioUnit.framework in Frameworks */,
@@ -109,6 +120,7 @@
 		A4F6106B1CB49E87009A6F88 = {
 			isa = PBXGroup;
 			children = (
+				A4680FE81CC485C500888D9C /* glfw3.h */,
 				A4F610AE1CB4D1F9009A6F88 /* Frameworks */,
 				A4F610A11CB4CD32009A6F88 /* portaudio.h */,
 				A4F610761CB49E87009A6F88 /* ModularSoftSynth */,
@@ -157,6 +169,8 @@
 				A4B434C11CBCA95800EF7A75 /* MWhiteNoiseGenerator.cpp */,
 				A44255041CBDA96800F9FAC0 /* MModulator.hpp */,
 				A44255031CBDA96800F9FAC0 /* MModulator.cpp */,
+				A4680FE31CC46E1E00888D9C /* MDisplay.hpp */,
+				A4680FE21CC46E1E00888D9C /* MDisplay.cpp */,
 			);
 			name = Modules;
 			sourceTree = "<group>";
@@ -195,6 +209,9 @@
 		A4F610AE1CB4D1F9009A6F88 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A4680FE51CC4809F00888D9C /* libglfw3.3.1.dylib */,
+				A4680FE01CC46D3200888D9C /* OpenGL.framework */,
+				A4680FDE1CC46D2900888D9C /* GLUT.framework */,
 				A4F610AC1CB4D1F4009A6F88 /* libportaudio.a */,
 				A4F610AA1CB4D1D1009A6F88 /* Carbon.framework */,
 				A4F610A81CB4D1CC009A6F88 /* CoreServices.framework */,
@@ -266,6 +283,7 @@
 				A4F610991CB4B961009A6F88 /* TestSynth.cpp in Sources */,
 				A4F6109C1CB4B9C8009A6F88 /* MFinal.cpp in Sources */,
 				A4F610841CB4A0B8009A6F88 /* MOscillator.cpp in Sources */,
+				A4680FE41CC46E1E00888D9C /* MDisplay.cpp in Sources */,
 				A44255051CBDA96800F9FAC0 /* MModulator.cpp in Sources */,
 				A48667861CB5CA5700310C29 /* MAdder.cpp in Sources */,
 				A4F6108C1CB4A87D009A6F88 /* ModuleDataBuffer.cpp in Sources */,
@@ -366,7 +384,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				HEADER_SEARCH_PATHS = /usr/local/include/;
-				LIBRARY_SEARCH_PATHS = /usr/local/lib/;
+				LIBRARY_SEARCH_PATHS = (
+					/usr/local/lib/,
+					/usr/local/Cellar/glfw3/3.1.2/lib,
+				);
+				OTHER_CPLUSPLUSFLAGS = (
+					"$(OTHER_CFLAGS)",
+					"-funroll-loops",
+					"-O3",
+				);
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -376,7 +402,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				HEADER_SEARCH_PATHS = /usr/local/include/;
-				LIBRARY_SEARCH_PATHS = /usr/local/lib/;
+				LIBRARY_SEARCH_PATHS = (
+					/usr/local/lib/,
+					/usr/local/Cellar/glfw3/3.1.2/lib,
+				);
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

@@ -23,7 +23,17 @@ MWhiteNoiseGenerator::~MWhiteNoiseGenerator()
 void MWhiteNoiseGenerator::update()
 {
     while (output->getBufferSize() < MAX_BUFFER_SIZE) {
-        float data = rand() / float(RAND_MAX);
-        output->writeData(0.8 * data);
+        if (isEnabled()) {
+            double dx = (double)currentTime / SAMPLE_RATE;
+            float data = envelopeCoeff(dx) * (rand() / float(RAND_MAX));
+            output->writeData(data);
+            
+            currentTime++;
+            if (currentTime == INT64_MAX) {
+                currentTime = 0;
+            }
+        } else {
+            output->writeData(0.0);
+        }
     }
 }

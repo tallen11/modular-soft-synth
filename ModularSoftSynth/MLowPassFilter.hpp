@@ -19,6 +19,8 @@ public:
     void update();
     
 private:
+    inline double filter(double beta, double *samples, size_t samplesLength, int index);
+    
     ModuleInput *dataInput;
     ModuleInput *betaInput;
     double lastSample = 0.0;

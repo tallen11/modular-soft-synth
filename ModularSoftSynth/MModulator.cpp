@@ -12,11 +12,13 @@
 
 MModulator::MModulator(double modFreq, double carFreq, double modIndex)
 {
-//    hasInputs();
+    hasInputs();
     hasOutput();
 //    carrierInput = createInput("carrier");
 //    signalInput = createInput("signal");
     
+    alphaInput = createInput("alpha");
+    betaInput = createInput("beta");
     modFrequency = modFreq;
     carrierFrequency = carFreq;
     modulationIndex = modIndex;
@@ -32,7 +34,17 @@ void MModulator::update()
     while (output->getBufferSize() < MAX_BUFFER_SIZE) {
         if (isEnabled()) {
             double dx = ((double)currentTime / SAMPLE_RATE);
-            double data = envelopeCoeff(dx) * sin(2.0 * M_PI * carrierFrequency * dx + modulationIndex * sin(2.0 * M_PI * modFrequency * dx));
+            double alpha = 1.0;
+            if (alphaInput->canRead()) {
+                alpha = alphaInput->readData();
+            }
+            
+            double beta = 1.0;
+            if (betaInput->canRead()) {
+                beta = betaInput->readData();
+            }
+            
+            double data = envelopeCoeff(dx) * sin(alpha * 2.0 * M_PI * carrierFrequency * dx + modulationIndex * sin(beta * 2.0 * M_PI * modFrequency * dx));
             output->writeData(data);
             
             currentTime++;

@@ -10,6 +10,7 @@
 
 MValue::MValue(double value)
 {
+    hasOutput();
     this->value = value;
 }
 

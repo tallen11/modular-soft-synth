@@ -20,6 +20,14 @@ MOscillator::MOscillator(double frequency)
 {
     this->hasOutput();
     this->frequency = frequency;
+    this->phaseOffset = 0.0;
+}
+
+MOscillator::MOscillator(double frequency, double phaseOffset)
+{
+    this->hasOutput();
+    this->frequency = frequency;
+    this->phaseOffset = phaseOffset;
 }
 
 MOscillator::~MOscillator()
@@ -32,8 +40,10 @@ void MOscillator::update()
     while (output->getBufferSize() < MAX_BUFFER_SIZE) {
         if (isEnabled()) {
             double dx = ((double)currentTime / SAMPLE_RATE);
-            double data = envelopeCoeff(dx) * sin(2.0 * M_PI * frequency * dx);
+            double data = envelopeCoeff(dx) * sin(2.0 * M_PI * frequency * dx + phaseOffset);
             output->writeData(data);
+            
+//            std::cout << data << std::endl;
             
             currentTime++;
             if (currentTime == INT64_MAX) {

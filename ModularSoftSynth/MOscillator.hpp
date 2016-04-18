@@ -16,11 +16,13 @@ class MOscillator : public Module {
 public:
     MOscillator();
     MOscillator(double frequency);
+    MOscillator(double frequency, double phaseOffset);
     ~MOscillator();
     void update();
     
 private:    
     double frequency;
+    double phaseOffset;
 };
 
 #endif /* MOscillator_hpp */

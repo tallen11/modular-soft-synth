@@ -49,6 +49,12 @@ public:
     
     inline double envelopeCoeff(double dx)
     {
+//        return 1.0;
+        
+        if (dx >= 130.0) {
+            return 1.0;
+        }
+        
         return -(1.0 / (dx+1)) + 1.0;
     }
     

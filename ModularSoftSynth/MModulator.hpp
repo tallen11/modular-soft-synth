@@ -21,6 +21,8 @@ public:
 private:
 //    ModuleInput *carrierInput;
 //    ModuleInput *signalInput;
+    ModuleInput *alphaInput;
+    ModuleInput *betaInput;
     double modulationIndex;
     double modFrequency;
     double carrierFrequency;

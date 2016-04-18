@@ -25,9 +25,7 @@ MLowPassFilter::~MLowPassFilter()
 
 void MLowPassFilter::update()
 {
-    if (isEnabled()) {        
-        // y(i)= β∗x(i)+(1-β)∗y(i-1)
-        
+    if (isEnabled() && dataInput->canRead()) {
         size_t bufferSize = dataInput->getBufferSize();
         double data[bufferSize];
         for (int i = 0; i < bufferSize; ++i) {
@@ -51,4 +49,14 @@ void MLowPassFilter::update()
             output->writeData(dataInput->readData());
         }
     }
+}
+
+inline double MLowPassFilter::filter(double beta, double *samples, size_t samplesLength, int index)
+{
+    // y(i)= β∗x(i)+(1-β)∗y(i-1)
+    if (index == 0) {
+        return beta * samples[index] + (1.0 - beta) * (beta * lastSample + (1.0 - beta));
+    }
+    
+    return beta * samples[index] + (1.0 - beta) * filter(beta, samples, samplesLength, index - 1);
 }

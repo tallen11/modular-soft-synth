@@ -12,6 +12,11 @@
 #include "Module.hpp"
 #include "portaudio.h"
 
+struct DataInputs {
+    ModuleInput *leftInput;
+    ModuleInput *rightInput;
+};
+
 class MFinal : public Module {
     
 public:
@@ -22,7 +27,9 @@ public:
 private:
     static int callback(const void *input, void *output, unsigned long frameCount, const PaStreamCallbackTimeInfo* timeInfo, PaStreamCallbackFlags statusFlags, void *userData);
     
-    ModuleInput *dataInput;
+    ModuleInput *leftDataInput;
+    ModuleInput *rightDataInput;
+    DataInputs *inputs;
     PaStream *paStream;
 };
 
