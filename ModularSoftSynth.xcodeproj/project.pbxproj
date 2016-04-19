@@ -56,13 +56,13 @@
 		A4680FE21CC46E1E00888D9C /* MDisplay.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MDisplay.cpp; sourceTree = "<group>"; };
 		A4680FE31CC46E1E00888D9C /* MDisplay.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = MDisplay.hpp; sourceTree = "<group>"; };
 		A4680FE51CC4809F00888D9C /* libglfw3.3.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libglfw3.3.1.dylib; path = ../../../../../usr/local/Cellar/glfw3/3.1.2/lib/libglfw3.3.1.dylib; sourceTree = "<group>"; };
-		A4680FE81CC485C500888D9C /* glfw3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = glfw3.h; path = ../../../../../usr/local/Cellar/glfw3/3.1.2/include/GLFW/glfw3.h; sourceTree = "<group>"; };
+		A4680FE81CC485C500888D9C /* glfw3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = glfw3.h; path = /usr/local/Cellar/glfw3/3.1.2/include/GLFW/glfw3.h; sourceTree = "<absolute>"; };
 		A4680FE91CC4A26300888D9C /* libfftw3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libfftw3.a; path = ../../../../../usr/local/Cellar/fftw/3.3.4_1/lib/libfftw3.a; sourceTree = "<group>"; };
-		A4680FEB1CC4A27F00888D9C /* fftw3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = fftw3.h; path = ../../../../../usr/local/Cellar/fftw/3.3.4_1/include/fftw3.h; sourceTree = "<group>"; };
+		A4680FEB1CC4A27F00888D9C /* fftw3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = fftw3.h; path = /usr/local/Cellar/fftw/3.3.4_1/include/fftw3.h; sourceTree = "<absolute>"; };
 		A4680FEE1CC4B72E00888D9C /* MWavPlayer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MWavPlayer.cpp; sourceTree = "<group>"; };
 		A4680FEF1CC4B72E00888D9C /* MWavPlayer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = MWavPlayer.hpp; sourceTree = "<group>"; };
 		A4680FF11CC4BA4200888D9C /* libsndfile.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libsndfile.a; path = ../../../../../usr/local/Cellar/libsndfile/1.0.26/lib/libsndfile.a; sourceTree = "<group>"; };
-		A4680FF31CC4BA5400888D9C /* sndfile.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = sndfile.hh; path = ../../../../../usr/local/Cellar/libsndfile/1.0.26/include/sndfile.hh; sourceTree = "<group>"; };
+		A4680FF31CC4BA5400888D9C /* sndfile.hh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = sndfile.hh; path = /usr/local/Cellar/libsndfile/1.0.26/include/sndfile.hh; sourceTree = "<absolute>"; };
 		A4680FF61CC56DF300888D9C /* Shaders.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Shaders.cpp; sourceTree = "<group>"; };
 		A4680FF71CC56DF300888D9C /* Shaders.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Shaders.hpp; sourceTree = "<group>"; };
 		A4680FF91CC570A400888D9C /* vertex.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = vertex.glsl; sourceTree = "<group>"; };
@@ -144,6 +144,17 @@
 			name = Shaders;
 			sourceTree = "<group>";
 		};
+		A4680FFE1CC5BA9200888D9C /* Headers */ = {
+			isa = PBXGroup;
+			children = (
+				A4680FF31CC4BA5400888D9C /* sndfile.hh */,
+				A4680FEB1CC4A27F00888D9C /* fftw3.h */,
+				A4680FE81CC485C500888D9C /* glfw3.h */,
+				A4F610A11CB4CD32009A6F88 /* portaudio.h */,
+			);
+			name = Headers;
+			sourceTree = "<group>";
+		};
 		A486677F1CB5823000310C29 /* External */ = {
 			isa = PBXGroup;
 			children = (
@@ -155,11 +166,7 @@
 		A4F6106B1CB49E87009A6F88 = {
 			isa = PBXGroup;
 			children = (
-				A4680FF31CC4BA5400888D9C /* sndfile.hh */,
-				A4680FEB1CC4A27F00888D9C /* fftw3.h */,
-				A4680FE81CC485C500888D9C /* glfw3.h */,
 				A4F610AE1CB4D1F9009A6F88 /* Frameworks */,
-				A4F610A11CB4CD32009A6F88 /* portaudio.h */,
 				A4F610761CB49E87009A6F88 /* ModularSoftSynth */,
 				A4F610751CB49E87009A6F88 /* Products */,
 			);
@@ -249,6 +256,7 @@
 		A4F610AE1CB4D1F9009A6F88 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A4680FFE1CC5BA9200888D9C /* Headers */,
 				A4680FF11CC4BA4200888D9C /* libsndfile.a */,
 				A4680FE91CC4A26300888D9C /* libfftw3.a */,
 				A4680FE51CC4809F00888D9C /* libglfw3.3.1.dylib */,
@@ -433,6 +441,7 @@
 					/usr/local/Cellar/glfw3/3.1.2/lib,
 					/usr/local/Cellar/fftw/3.3.4_1/lib,
 					/usr/local/Cellar/libsndfile/1.0.26/lib,
+					/usr/local/Cellar/glew/1.13.0/lib,
 				);
 				OTHER_CPLUSPLUSFLAGS = (
 					"$(OTHER_CFLAGS)",
@@ -453,6 +462,7 @@
 					/usr/local/Cellar/glfw3/3.1.2/lib,
 					/usr/local/Cellar/fftw/3.3.4_1/lib,
 					/usr/local/Cellar/libsndfile/1.0.26/lib,
+					/usr/local/Cellar/glew/1.13.0/lib,
 				);
 				OTHER_LDFLAGS = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";

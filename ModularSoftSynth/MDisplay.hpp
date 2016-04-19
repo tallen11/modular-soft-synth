@@ -13,6 +13,7 @@
 #include <cmath>
 #include "glfw3.h"
 #include "fftw3.h"
+#include <OpenGL/gl3.h>
 
 class MDisplay : public Module {
     
@@ -22,12 +23,15 @@ public:
     void update();
     
 private:
-    void display(void);
-    void reshape(int width, int height);
-        
+    void render();
+    
     ModuleInput *leftChannelInput;
     ModuleInput *rightChannelInput;
     GLFWwindow *window;
+    
+    GLuint vaoHandle;
+    GLuint vertexBufferHandle;
+    GLuint shaderProgramHandle;
     
     fftw_complex *fftInputBuffer;
     fftw_complex *fftOutputBuffer;

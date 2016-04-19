@@ -61,9 +61,9 @@ TestSynth::TestSynth()
     
 //    /* FM Sound */
 //    double carrier = 440.0;
-//    auto fm = new MModulator(carrier * 1.5, carrier, 1.0);
-//    auto alphaValue = new MValue(0.5);
-//    auto betaValue = new MValue(0.5);
+//    auto fm = new MModulator(carrier * 10.5, carrier, 1.0);
+//    auto alphaValue = new MValue(0.1);
+//    auto betaValue = new MValue(0.01);
 //    auto final = new MFinal();
 //    
 //    addModule(alphaValue);

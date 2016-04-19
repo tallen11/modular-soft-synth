@@ -47,6 +47,8 @@ GLuint Shaders::compileShaderCode(const std::string &code, GLenum type)
         std::vector<char> shaderErrorMessage(infoLength + 1);
         glGetShaderInfoLog(shaderHandle, infoLength, NULL, &shaderErrorMessage[0]);
         std::cout << "Error compiling shader: " << &shaderErrorMessage[0] << std::endl;
+    } else {
+        std::cout << "Shader compilation successful" << std::endl;
     }
     
     return shaderHandle;
@@ -70,13 +72,15 @@ GLuint Shaders::createShaderProgram(const std::string &vertexShaderCode, const s
         std::vector<char> programErrorMessage(infoLength + 1);
         glGetProgramInfoLog(programHandle, infoLength, NULL, &programErrorMessage[0]);
         std::cout << "Error linking program: " << &programErrorMessage[0] << std::endl;
+    } else {
+        std::cout << "Shader program linking successful" << std::endl;
     }
     
-    glDetachShader(programHandle, vertexHandle);
-    glDetachShader(programHandle, fragmentHandle);
-    
-    glDeleteShader(vertexHandle);
-    glDeleteShader(fragmentHandle);
+//    glDetachShader(programHandle, vertexHandle);
+//    glDetachShader(programHandle, fragmentHandle);
+//    
+//    glDeleteShader(vertexHandle);
+//    glDeleteShader(fragmentHandle);
     
     return programHandle;
 }
