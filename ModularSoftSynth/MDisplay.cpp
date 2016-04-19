@@ -51,8 +51,8 @@ MDisplay::MDisplay()
     const GLubyte *slVersion = glGetString(GL_SHADING_LANGUAGE_VERSION);
     std::cout << "Renderer: " << rendererVersion << ", GL: " << glVersion << ", Shading Language: " << slVersion << std::endl;
     
-    glEnable(GL_DEPTH_TEST);
-    glDepthFunc(GL_LESS);
+//    glEnable(GL_DEPTH_TEST);
+//    glDepthFunc(GL_LESS);
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
     
     glGenBuffers(1, &vertexBufferHandle);
@@ -67,8 +67,6 @@ MDisplay::MDisplay()
     std::string vsc = Shaders::loadShaderCode("/Users/tateallen/Documents/DigitalAudio/ModularSoftSynth/ModularSoftSynth/vertex.glsl");
     std::string fsc = Shaders::loadShaderCode("/Users/tateallen/Documents/DigitalAudio/ModularSoftSynth/ModularSoftSynth/fragment.glsl");
     shaderProgramHandle = Shaders::createShaderProgram(vsc, fsc);
-    
-//    glClearColor(0, 0, 0, 1);
 }
 
 MDisplay::~MDisplay()
@@ -164,20 +162,11 @@ void MDisplay::render()
     glClear(GL_COLOR_BUFFER_BIT);
     glUseProgram(shaderProgramHandle);
     
-    glBindVertexArray(vaoHandle);
-    glDrawArrays(GL_TRIANGLES, 0, 3);
-    
-//    glEnableVertexAttribArray(0);
-//    glBindBuffer(GL_ARRAY_BUFFER, vertexBufferHandle);
-//    glVertexAttribPointer(0,
-//                          3,
-//                          GL_FLOAT,
-//                          GL_FALSE,
-//                          0,
-//                          (void*)0);
-//    
-//    glDrawArrays(GL_TRIANGLES, 0, 3);
-//    glDisableVertexAttribArray(0);
+    glEnableVertexAttribArray(0);
+    glBindBuffer(GL_ARRAY_BUFFER, vertexBufferHandle);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, NULL);
+    glDrawArrays(GL_POINTS, 0, 3);
+    glDisableVertexAttribArray(0);
     
     glfwSwapBuffers(window);
     glfwPollEvents();
