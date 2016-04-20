@@ -75,52 +75,116 @@ MDisplay::~MDisplay()
 
 void MDisplay::update()
 {
-//    if (!leftChannelInput->canRead()) {
-//        return;
-//    }
-    
-    for (int i = 0; i < MAX_BUFFER_SIZE; ++i) {
-        if (leftChannelInput->canRead()) {
-            double in = leftChannelInput->readData();
-            fftInputBuffer[i][0] = in * hanningWindow(i);
-            fftInputBuffer[i][1] = in * hanningWindow(i);
-        } else {
-            fftInputBuffer[i][0] = 0.0;
-            fftInputBuffer[i][1] = 0.0;
-        }
-    }
-    
-    fftw_execute(plan);
-    
-    double magnitude = 0.0;
-    int freqsIndex = 0;
-    for (int i = 0; i < MAX_BUFFER_SIZE; ++i) {
-        double com[] = { fftOutputBuffer[i][0], fftOutputBuffer[i][1] };
-        freqs[freqsIndex] = (GLdouble)com[0];
-        freqs[freqsIndex+1] = (GLdouble)(i / WIDTH);
-        magnitude += freqs[freqsIndex] * freqs[freqsIndex];
-        freqsIndex += 2;
-    }
-    
-    freqsIndex = 0;
-    magnitude = sqrt(magnitude);
-    double maxAmpl = 0.0;
-    for (int i = 0; i < MAX_BUFFER_SIZE; ++i) {
-        freqs[freqsIndex] /= (GLdouble)magnitude;
-        if (fabs(freqs[freqsIndex]) > maxAmpl) {
-            maxAmpl = fabs(freqs[freqsIndex]);
+//    processDataOriginal();
+    processDataSlow();
+    render();
+}
+
+inline void MDisplay::processDataOriginal()
+{
+    if (leftChannelInput->canRead()) {
+        for (int i = 0; i < MAX_BUFFER_SIZE; ++i) {
+            if (leftChannelInput->canRead()) {
+                double in = leftChannelInput->readData();
+                fftInputBuffer[i][0] = in * hanningWindow(i);
+                fftInputBuffer[i][1] = in * hanningWindow(i);
+            } else {
+                fftInputBuffer[i][0] = 0.0;
+                fftInputBuffer[i][1] = 0.0;
+            }
         }
         
-        freqsIndex += 2;
+        fftw_execute(plan);
+        
+        double magnitude = 0.0;
+        int freqsIndex = 0;
+        for (int i = 0; i < MAX_BUFFER_SIZE; ++i) {
+            double com[] = { fftOutputBuffer[i][0], fftOutputBuffer[i][1] };
+            freqs[freqsIndex] = (GLdouble)com[0];
+            freqs[freqsIndex+1] = (GLdouble)(i / WIDTH);
+            magnitude += freqs[freqsIndex] * freqs[freqsIndex];
+            freqsIndex += 2;
+        }
+        
+        freqsIndex = 0;
+        magnitude = sqrt(magnitude);
+        double maxAmpl = 0.0;
+        for (int i = 0; i < MAX_BUFFER_SIZE; ++i) {
+            freqs[freqsIndex] /= (GLdouble)magnitude;
+            if (fabs(freqs[freqsIndex]) > maxAmpl) {
+                maxAmpl = fabs(freqs[freqsIndex]);
+            }
+            
+            freqsIndex += 2;
+        }
+    } else {
+        for (int i = 0; i < MAX_BUFFER_SIZE; ++i) {
+            freqs[i] *= 0.8;
+        }
     }
-    
-    render();
+}
+
+inline void MDisplay::processDataSlow()
+{
+    if (leftChannelInput->canRead()) {
+        for (int i = 0; i < MAX_BUFFER_SIZE; ++i) {
+            if (leftChannelInput->canRead()) {
+                double in = leftChannelInput->readData();
+                fftInputBuffer[i][0] = in * hanningWindow(i);
+                fftInputBuffer[i][1] = in * hanningWindow(i);
+            } else {
+                fftInputBuffer[i][0] = 0.0;
+                fftInputBuffer[i][1] = 0.0;
+            }
+        }
+        
+        fftw_execute(plan);
+        
+        double buffer[MAX_BUFFER_SIZE];
+        
+        double magnitude = 0.0;
+        int freqsIndex = 0;
+        for (int i = 0; i < MAX_BUFFER_SIZE; ++i) {
+            double com[] = { fftOutputBuffer[i][0], fftOutputBuffer[i][1] };
+            buffer[i] = com[0];
+            freqs[freqsIndex+1] = (GLdouble)(i / WIDTH);
+            magnitude += buffer[i] * buffer[i];
+            freqsIndex += 2;
+        }
+        
+        freqsIndex = 0;
+        magnitude = sqrt(magnitude);
+        double maxAmpl = 0.0;
+        for (int i = 0; i < MAX_BUFFER_SIZE; ++i) {
+            buffer[i] /= magnitude;
+            if (fabs(buffer[i]) > maxAmpl) {
+                maxAmpl = fabs(buffer[i]);
+            }
+            
+            freqsIndex += 2;
+        }
+        
+        freqsIndex = 0;
+        for (int i = 0; i < MAX_BUFFER_SIZE; ++i) {
+            if (fabs(freqs[freqsIndex]) < fabs(buffer[i])) {
+                freqs[freqsIndex] = (GLdouble)buffer[i];
+            } else {
+                freqs[freqsIndex] *= 0.75;
+            }
+            
+            freqsIndex += 2;
+        }
+    } else {
+        for (int i = 0; i < MAX_BUFFER_SIZE; ++i) {
+            freqs[i] *= 0.9;
+        }
+    }
 }
 
 //static double lastTime = glfwGetTime();
 //static int frames = 0;
 
-void MDisplay::render()
+inline void MDisplay::render()
 {
 //    frames++;
 //    double time = glfwGetTime();

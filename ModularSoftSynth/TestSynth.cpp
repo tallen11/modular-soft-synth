@@ -39,41 +39,41 @@ TestSynth::TestSynth()
 //    
 //    connectModules(oscillator, final, "left");
 
-//    /* Wav Files w/ Display */
-//    auto player = new MWavPlayer("/Users/tateallen/Desktop/loop1.wav");
-//    auto lpfOscillator = new MOscillator(0.25);
-//    auto lpf = new MLowPassFilter();
-//    auto final = new MFinal();
-//    auto display = new MDisplay();
-//    
-//    lpfOscillator->setEnabled(false);
-//    lpf->setEnabled(false);
-//    
-//    addModule(player);
-//    addModule(lpfOscillator);
-//    addModule(lpf);
-//    addModule(final);
-//    addModule(display);
-//    
-//    connectModules(lpfOscillator, lpf, "beta");
-//    connectModules(player, lpf, "data");
-//    connectModules(lpf, final, "left");
-//    connectModules(lpf, display, "left");
-    
-    /* Sine Wave w/ Display */
-    auto osc = new MOscillator(500);
-    auto pulse = new MPulser(100000, 100000);
+    /* Wav Files w/ Display */
+    auto player = new MWavPlayer("/Users/tateallen/Desktop/loop1.wav");
+    auto lpfOscillator = new MOscillator(0.25);
+    auto lpf = new MLowPassFilter();
     auto final = new MFinal();
     auto display = new MDisplay();
     
-    addModule(osc);
-    addModule(pulse);
+    lpfOscillator->setEnabled(false);
+    lpf->setEnabled(false);
+    
+    addModule(player);
+    addModule(lpfOscillator);
+    addModule(lpf);
     addModule(final);
     addModule(display);
     
-    connectModules(osc, pulse, "data");
-    connectModules(pulse, final, "left");
-    connectModules(pulse, display, "left");
+    connectModules(lpfOscillator, lpf, "beta");
+    connectModules(player, lpf, "data");
+    connectModules(lpf, final, "left");
+    connectModules(final, display, "left");
+    
+//    /* Testing Audio and Video Sync */
+//    auto osc = new MOscillator(500);
+//    auto pulse = new MPulser(100000, 100000);
+//    auto final = new MFinal();
+//    auto display = new MDisplay();
+//    
+//    addModule(osc);
+//    addModule(pulse);
+//    addModule(final);
+//    addModule(display);
+//    
+//    connectModules(osc, pulse, "data");
+//    connectModules(pulse, final, "left");
+//    connectModules(final, display, "left");
     
 //    /* FM Sound */
 //    double carrier = 440.0;

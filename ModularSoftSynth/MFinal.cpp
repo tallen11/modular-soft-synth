@@ -14,6 +14,7 @@
 int MFinal::callback(const void *input, void *output, unsigned long frameCount, const PaStreamCallbackTimeInfo* timeInfo, PaStreamCallbackFlags statusFlags, void *userData)
 {
     auto inputs = static_cast<DataInputs*>(userData);
+    auto module = inputs->module;
     auto leftInput = inputs->leftInput;
     auto rightInput = inputs->rightInput;
     
@@ -23,6 +24,7 @@ int MFinal::callback(const void *input, void *output, unsigned long frameCount, 
         if (leftInput->canRead()) {
             double leftData = leftInput->readData();
             *out++ = leftData;
+            module->writeToOutputs(leftData);
             if (rightInput->canRead()) {
                 *out++ = rightInput->readData();
             } else {
@@ -40,9 +42,11 @@ int MFinal::callback(const void *input, void *output, unsigned long frameCount, 
 MFinal::MFinal()
 {
     this->hasInputs();
+    this->hasOutput();
     this->leftDataInput = this->createInput("left");
     this->rightDataInput = this->createInput("right");
     this->inputs = new DataInputs;
+    this->inputs->module = this;
     this->inputs->leftInput = leftDataInput;
     this->inputs->rightInput = rightDataInput;
     

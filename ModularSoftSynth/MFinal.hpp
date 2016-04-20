@@ -12,10 +12,7 @@
 #include "Module.hpp"
 #include "portaudio.h"
 
-struct DataInputs {
-    ModuleInput *leftInput;
-    ModuleInput *rightInput;
-};
+struct DataInputs;
 
 class MFinal : public Module {
     
@@ -31,6 +28,12 @@ private:
     ModuleInput *rightDataInput;
     DataInputs *inputs;
     PaStream *paStream;
+};
+
+struct DataInputs {
+    MFinal *module;
+    ModuleInput *leftInput;
+    ModuleInput *rightInput;
 };
 
 #endif /* MFinal_hpp */

@@ -23,7 +23,9 @@ public:
     void update();
     
 private:
-    void render();
+    inline void render();
+    inline void processDataOriginal();
+    inline void processDataSlow();
     
     ModuleInput *leftChannelInput;
     ModuleInput *rightChannelInput;
