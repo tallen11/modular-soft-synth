@@ -36,7 +36,7 @@ private:
     fftw_complex *fftInputBuffer;
     fftw_complex *fftOutputBuffer;
     fftw_plan plan;
-    double freqs[MAX_BUFFER_SIZE/2];
+    GLdouble freqs[MAX_BUFFER_SIZE * 2];
 };
 
 inline double hanningWindow(int x)

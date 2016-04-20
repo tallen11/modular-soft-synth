@@ -13,12 +13,6 @@
 #define WIDTH 512.0
 #define HEIGHT 512.0
 
-static const GLfloat vertexBufferData[] = {
-    0.0f,  0.5f,  0.0f,
-    0.5f, -0.5f,  0.0f,
-    -0.5f, -0.5f,  0.0f
-};
-
 MDisplay::MDisplay()
 {
     hasInputs();
@@ -51,18 +45,16 @@ MDisplay::MDisplay()
     const GLubyte *slVersion = glGetString(GL_SHADING_LANGUAGE_VERSION);
     std::cout << "Renderer: " << rendererVersion << ", GL: " << glVersion << ", Shading Language: " << slVersion << std::endl;
     
-//    glEnable(GL_DEPTH_TEST);
-//    glDepthFunc(GL_LESS);
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
     
     glGenBuffers(1, &vertexBufferHandle);
     glBindBuffer(GL_ARRAY_BUFFER, vertexBufferHandle);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertexBufferData), vertexBufferData, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(freqs), freqs, GL_STATIC_DRAW);
     
     glGenVertexArrays(1, &vaoHandle);
     glBindVertexArray(vaoHandle);
     glBindBuffer(GL_ARRAY_BUFFER, vertexBufferHandle);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, NULL);
+    glVertexAttribPointer(0, 2, GL_DOUBLE, GL_FALSE, 0, NULL);
     
     std::string vsc = Shaders::loadShaderCode("/Users/tateallen/Documents/DigitalAudio/ModularSoftSynth/ModularSoftSynth/vertex.glsl");
     std::string fsc = Shaders::loadShaderCode("/Users/tateallen/Documents/DigitalAudio/ModularSoftSynth/ModularSoftSynth/fragment.glsl");
@@ -81,32 +73,17 @@ MDisplay::~MDisplay()
     fftw_free(fftOutputBuffer);
 }
 
-//static double lastTime = glfwGetTime();
-//static int frames = 0;
-
 void MDisplay::update()
 {
-//    frames++;
-//    double time = glfwGetTime();
-//    if (time - lastTime >= 1.0) {
-//        std::cout << 1000.0 / frames << " ms/f, " << frames / 1.0 << " fps" << std::endl;
-//        lastTime = time;
-//        frames = 0;
-//    }
-    
 //    if (!leftChannelInput->canRead()) {
 //        return;
 //    }
-    
-    
-    render();
-    
     
     for (int i = 0; i < MAX_BUFFER_SIZE; ++i) {
         if (leftChannelInput->canRead()) {
             double in = leftChannelInput->readData();
             fftInputBuffer[i][0] = in * hanningWindow(i);
-            fftInputBuffer[i][1] = 0.0; // in * hanningWindow(i);
+            fftInputBuffer[i][1] = in * hanningWindow(i);
         } else {
             fftInputBuffer[i][0] = 0.0;
             fftInputBuffer[i][1] = 0.0;
@@ -116,56 +93,52 @@ void MDisplay::update()
     fftw_execute(plan);
     
     double magnitude = 0.0;
-    for (int i = 0; i < MAX_BUFFER_SIZE/2; ++i) {
+    int freqsIndex = 0;
+    for (int i = 0; i < MAX_BUFFER_SIZE; ++i) {
         double com[] = { fftOutputBuffer[i][0], fftOutputBuffer[i][1] };
-        freqs[i] = com[0];
-        magnitude += freqs[i] * freqs[i];
+        freqs[freqsIndex] = (GLdouble)com[0];
+        freqs[freqsIndex+1] = (GLdouble)(i / WIDTH);
+        magnitude += freqs[freqsIndex] * freqs[freqsIndex];
+        freqsIndex += 2;
     }
     
+    freqsIndex = 0;
     magnitude = sqrt(magnitude);
     double maxAmpl = 0.0;
-    for (int i = 0; i < MAX_BUFFER_SIZE/2; ++i) {
-        freqs[i] /= magnitude;
-        if (fabs(freqs[i]) > maxAmpl) {
-            maxAmpl = fabs(freqs[i]);
+    for (int i = 0; i < MAX_BUFFER_SIZE; ++i) {
+        freqs[freqsIndex] /= (GLdouble)magnitude;
+        if (fabs(freqs[freqsIndex]) > maxAmpl) {
+            maxAmpl = fabs(freqs[freqsIndex]);
         }
+        
+        freqsIndex += 2;
     }
     
-//    for (int k = 0; k < 1; ++k) {
-//        for (int i = 1; i < MAX_BUFFER_SIZE/2 - 1; ++i) {
-////            int prevIndex = (i - 1 < 0 ? MAX_BUFFER_SIZE / 2 : i - 1);
-//            freqs[i] = (freqs[i-1] + freqs[i+1]) / 2.0;
-//        }
-//    }
-    
-    
-//
-//    glClear(GL_COLOR_BUFFER_BIT);
-//    
-//    glColor3f(maxAmpl, 1.0 - maxAmpl, 1.0);
-//    glPointSize(3.0);
-//    
-//    glBegin(GL_POINTS);
-//    for (int i = 0; i < MAX_BUFFER_SIZE/2.0; ++i) {
-//        double x = i / WIDTH * 2.0 - 0.95;
-//        double y = ((freqs[i] * HEIGHT) / HEIGHT);
-//        glVertex3d(x, y, 0.0);
-//    }
-//    glEnd();
-//    
-//    glfwSwapBuffers(window);
-//    glfwPollEvents();
+    render();
 }
+
+//static double lastTime = glfwGetTime();
+//static int frames = 0;
 
 void MDisplay::render()
 {
+//    frames++;
+//    double time = glfwGetTime();
+//    if (time - lastTime >= 1.0) {
+//        std::cout << 1000.0 / frames << " ms/f, " << frames / 1.0 << " fps" << std::endl;
+//        lastTime = time;
+//        frames = 0;
+//    }
+    
+    glBufferData(GL_ARRAY_BUFFER, sizeof(freqs), freqs, GL_STATIC_DRAW);
+    
     glClear(GL_COLOR_BUFFER_BIT);
     glUseProgram(shaderProgramHandle);
     
     glEnableVertexAttribArray(0);
     glBindBuffer(GL_ARRAY_BUFFER, vertexBufferHandle);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, NULL);
-    glDrawArrays(GL_POINTS, 0, 3);
+    glVertexAttribPointer(0, 2, GL_DOUBLE, GL_FALSE, 0, NULL);
+    glDrawArrays(GL_POINTS, 0, MAX_BUFFER_SIZE);
     glDisableVertexAttribArray(0);
     
     glfwSwapBuffers(window);

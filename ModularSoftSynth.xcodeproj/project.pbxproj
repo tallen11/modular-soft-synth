@@ -15,6 +15,7 @@
 		A4680FF01CC4B72E00888D9C /* MWavPlayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4680FEE1CC4B72E00888D9C /* MWavPlayer.cpp */; };
 		A4680FF21CC4BA4200888D9C /* libsndfile.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A4680FF11CC4BA4200888D9C /* libsndfile.a */; };
 		A4680FF81CC56DF300888D9C /* Shaders.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4680FF61CC56DF300888D9C /* Shaders.cpp */; };
+		A46810051CC6FCB600888D9C /* MPulser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46810031CC6FCB600888D9C /* MPulser.cpp */; };
 		A48667831CB5845100310C29 /* MValue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A48667811CB5845100310C29 /* MValue.cpp */; };
 		A48667861CB5CA5700310C29 /* MAdder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A48667841CB5CA5700310C29 /* MAdder.cpp */; };
 		A4B434BA1CBC8AD800EF7A75 /* MLowPassFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4B434B81CBC8AD800EF7A75 /* MLowPassFilter.cpp */; };
@@ -67,6 +68,8 @@
 		A4680FF71CC56DF300888D9C /* Shaders.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Shaders.hpp; sourceTree = "<group>"; };
 		A4680FF91CC570A400888D9C /* vertex.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = vertex.glsl; sourceTree = "<group>"; };
 		A4680FFA1CC5820600888D9C /* fragment.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = fragment.glsl; sourceTree = "<group>"; };
+		A46810031CC6FCB600888D9C /* MPulser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MPulser.cpp; sourceTree = "<group>"; };
+		A46810041CC6FCB600888D9C /* MPulser.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = MPulser.hpp; sourceTree = "<group>"; };
 		A48667801CB5825200310C29 /* TSQueue.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSQueue.h; sourceTree = "<group>"; };
 		A48667811CB5845100310C29 /* MValue.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MValue.cpp; sourceTree = "<group>"; };
 		A48667821CB5845100310C29 /* MValue.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = MValue.hpp; sourceTree = "<group>"; };
@@ -218,6 +221,8 @@
 				A4680FE21CC46E1E00888D9C /* MDisplay.cpp */,
 				A4680FEF1CC4B72E00888D9C /* MWavPlayer.hpp */,
 				A4680FEE1CC4B72E00888D9C /* MWavPlayer.cpp */,
+				A46810041CC6FCB600888D9C /* MPulser.hpp */,
+				A46810031CC6FCB600888D9C /* MPulser.cpp */,
 			);
 			name = Modules;
 			sourceTree = "<group>";
@@ -340,6 +345,7 @@
 				A4680FF81CC56DF300888D9C /* Shaders.cpp in Sources */,
 				A4F6108C1CB4A87D009A6F88 /* ModuleDataBuffer.cpp in Sources */,
 				A4F610921CB4ADD1009A6F88 /* ModuleInput.cpp in Sources */,
+				A46810051CC6FCB600888D9C /* MPulser.cpp in Sources */,
 				A4B434BD1CBC9DEC00EF7A75 /* MTriadGenerator.cpp in Sources */,
 				A4F610951CB4AEF0009A6F88 /* ModuleOutput.cpp in Sources */,
 				A4F610871CB4A635009A6F88 /* Synth.cpp in Sources */,

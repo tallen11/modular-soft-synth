@@ -17,6 +17,7 @@
 #include "MFinal.hpp"
 #include "MDisplay.hpp"
 #include "MWavPlayer.hpp"
+#include "MPulser.hpp"
 #include <cmath>
 
 #define C1 32.703
@@ -38,26 +39,41 @@ TestSynth::TestSynth()
 //    
 //    connectModules(oscillator, final, "left");
 
-    /* Wav Files w/ Display */
-    auto player = new MWavPlayer("/Users/tateallen/Desktop/loop1.wav");
-    auto lpfOscillator = new MOscillator(0.25);
-    auto lpf = new MLowPassFilter();
+//    /* Wav Files w/ Display */
+//    auto player = new MWavPlayer("/Users/tateallen/Desktop/loop1.wav");
+//    auto lpfOscillator = new MOscillator(0.25);
+//    auto lpf = new MLowPassFilter();
+//    auto final = new MFinal();
+//    auto display = new MDisplay();
+//    
+//    lpfOscillator->setEnabled(false);
+//    lpf->setEnabled(false);
+//    
+//    addModule(player);
+//    addModule(lpfOscillator);
+//    addModule(lpf);
+//    addModule(final);
+//    addModule(display);
+//    
+//    connectModules(lpfOscillator, lpf, "beta");
+//    connectModules(player, lpf, "data");
+//    connectModules(lpf, final, "left");
+//    connectModules(lpf, display, "left");
+    
+    /* Sine Wave w/ Display */
+    auto osc = new MOscillator(500);
+    auto pulse = new MPulser(100000, 100000);
     auto final = new MFinal();
     auto display = new MDisplay();
     
-    lpfOscillator->setEnabled(false);
-    lpf->setEnabled(false);
-    
-    addModule(player);
-    addModule(lpfOscillator);
-    addModule(lpf);
+    addModule(osc);
+    addModule(pulse);
     addModule(final);
     addModule(display);
     
-    connectModules(lpfOscillator, lpf, "beta");
-    connectModules(player, lpf, "data");
-    connectModules(lpf, final, "left");
-    connectModules(lpf, display, "left");
+    connectModules(osc, pulse, "data");
+    connectModules(pulse, final, "left");
+    connectModules(pulse, display, "left");
     
 //    /* FM Sound */
 //    double carrier = 440.0;
