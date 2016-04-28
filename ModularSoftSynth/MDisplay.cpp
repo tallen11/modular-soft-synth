@@ -12,7 +12,7 @@
 
 #define WIDTH 512.0
 #define HEIGHT 512.0
-#define NODE_COUNT 1024
+#define NODE_COUNT 64
 
 MDisplay::MDisplay()
 {
@@ -48,17 +48,22 @@ MDisplay::MDisplay()
     
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
     
-    glGenBuffers(1, &vertexBufferHandle);
-    glBindBuffer(GL_ARRAY_BUFFER, vertexBufferHandle);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(freqs), freqs, GL_STATIC_DRAW);
+    for (int i = 0; i < NODE_COUNT; ++i) {
+        auto bar = new Bar((2.0 * i) / NODE_COUNT, 1.0 / NODE_COUNT);
+        bars.push_back(bar);
+    }
+    
+//    glGenBuffers(1, &vertexBufferHandle);
+//    glBindBuffer(GL_ARRAY_BUFFER, vertexBufferHandle);
+//    glBufferData(GL_ARRAY_BUFFER, sizeof(freqs), freqs, GL_STATIC_DRAW);
     
     glGenVertexArrays(1, &vaoHandle);
     glBindVertexArray(vaoHandle);
     glBindBuffer(GL_ARRAY_BUFFER, vertexBufferHandle);
     glVertexAttribPointer(0, 2, GL_DOUBLE, GL_FALSE, 0, NULL);
     
-    std::string vsc = Shaders::loadShaderCode("/Users/tateallen/Documents/DigitalAudio/ModularSoftSynth/ModularSoftSynth/vertex.glsl");
-    std::string fsc = Shaders::loadShaderCode("/Users/tateallen/Documents/DigitalAudio/ModularSoftSynth/ModularSoftSynth/fragment.glsl");
+    std::string vsc = Shaders::loadShaderCode("/Users/tateallen/Documents/DigitalAudio/ModularSoftSynth/ModularSoftSynth/bar_vertex.glsl");
+    std::string fsc = Shaders::loadShaderCode("/Users/tateallen/Documents/DigitalAudio/ModularSoftSynth/ModularSoftSynth/bar_fragment.glsl");
     shaderProgramHandle = Shaders::createShaderProgram(vsc, fsc);
     
     particleColorHandle = glGetUniformLocation(shaderProgramHandle, "particleColor");
@@ -79,8 +84,10 @@ MDisplay::~MDisplay()
 void MDisplay::update()
 {
 //    processDataOriginal();
-    processDataSlow();
-    render();
+//    processDataSlow();
+    processDataBars();
+//    render();
+    renderBars();
 }
 
 //inline void MDisplay::processDataOriginal()
@@ -190,6 +197,66 @@ inline void MDisplay::processDataSlow()
     }
 }
 
+inline void MDisplay::processDataBars()
+{
+    if (leftChannelInput->canRead()) {
+        for (int i = 0; i < MAX_BUFFER_SIZE; ++i) {
+            if (leftChannelInput->canRead()) {
+                double in = leftChannelInput->readData();
+                fftInputBuffer[i] = in * hanningWindow(i);
+            } else {
+                fftInputBuffer[i] = 0.0;
+            }
+        }
+        
+        fftw_execute(plan);
+        
+        double buffer[NODE_COUNT];
+        
+        double magnitude = 0.0;
+        int freqsIndex = 0;
+        for (int i = 0; i < NODE_COUNT; ++i) {
+            double com = fftOutputBuffer[i];
+            buffer[i] = com;
+//            freqs[freqsIndex+1] = 2.0 * (GLdouble)i / NODE_COUNT;
+            magnitude += buffer[i] * buffer[i];
+            freqsIndex += 2;
+        }
+        
+        freqsIndex = 0;
+        magnitude = sqrt(magnitude);
+        double maxAmpl = 0.0;
+        for (int i = 0; i < NODE_COUNT; ++i) {
+            buffer[i] /= magnitude;
+            if (fabs(buffer[i]) > maxAmpl) {
+                maxAmpl = fabs(buffer[i]);
+            }
+            
+            freqsIndex += 2;
+        }
+        
+        freqsIndex = 0;
+        for (int i = 0; i < NODE_COUNT; ++i) {
+            if (bars[i]->height < fabs(buffer[i])) {
+                bars[i]->setHeight(fabs(buffer[i]));
+                bars[i]->setColor(1.0f, 1.0f, 1.0f, 1.0f);
+            } else {
+                bars[i]->setHeight(bars[i]->height * responseCurve(i, NODE_COUNT) /* 0.8 */);
+                bars[i]->multColor(/* responseCurve(i, NODE_COUNT) */ 0.9);
+            }
+            
+            freqsIndex += 2;
+        }
+        
+//        std::cout << responseCurve(0) << ", " << responseCurve(NODE)
+    } else {
+        for (int i = 0; i < NODE_COUNT; ++i) {
+            bars[i]->setHeight(bars[i]->height * 0.9);
+            bars[i]->multColor(/* responseCurve(i, NODE_COUNT) */ 0.9);
+        }
+    }
+}
+
 //static double lastTime = glfwGetTime();
 //static int frames = 0;
 
@@ -215,6 +282,19 @@ inline void MDisplay::render()
     glVertexAttribPointer(0, 2, GL_DOUBLE, GL_FALSE, 0, NULL);
     glDrawArrays(GL_LINE_LOOP, 0, MAX_BUFFER_SIZE);
     glDisableVertexAttribArray(0);
+    
+    glfwSwapBuffers(window);
+    glfwPollEvents();
+}
+
+inline void MDisplay::renderBars()
+{
+    glClear(GL_COLOR_BUFFER_BIT);
+    glUseProgram(shaderProgramHandle);
+    
+    for (auto bar : bars) {
+        bar->render(particleColorHandle);
+    }
     
     glfwSwapBuffers(window);
     glfwPollEvents();
