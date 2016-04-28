@@ -1,8 +1,9 @@
 #version 330 core
 
-out vec3 color;
+out vec4 color;
+uniform vec4 particleColor;
 
 void main()
 {
-    color = vec3(gl_FragCoord.y, gl_FragCoord.y, gl_FragCoord.y);
+    color = particleColor;
 }

@@ -40,7 +40,7 @@ TestSynth::TestSynth()
 //    connectModules(oscillator, final, "left");
 
     /* Wav Files w/ Display */
-    auto player = new MWavPlayer("/Users/tateallen/Desktop/loop1.wav");
+    auto player = new MWavPlayer("/Users/tateallen/Desktop/doots.wav");
     auto lpfOscillator = new MOscillator(0.25);
     auto lpf = new MLowPassFilter();
     auto final = new MFinal();
@@ -79,7 +79,7 @@ TestSynth::TestSynth()
 //    double carrier = 440.0;
 //    auto fm = new MModulator(carrier * 10.5, carrier, 1.0);
 //    auto alphaValue = new MValue(0.1);
-//    auto betaValue = new MValue(0.01);
+//    auto betaValue = new MValue(10.0);
 //    auto final = new MFinal();
 //    
 //    addModule(alphaValue);
@@ -92,8 +92,8 @@ TestSynth::TestSynth()
 //    connectModules(fm, final, "left");
     
 //    /* Frequency Modulated Beats */
-//    auto fm = new MModulator(2.0, 440.0, 25.0);
-//    auto fm2 = new MModulator(2.0, 460.0, 25.0);
+//    auto fm = new MModulator(4.0, 440.0, 0.0);
+//    auto fm2 = new MModulator(4.0, 440.5, 0.0);
 //    auto adder = new MAdder();
 //    auto final = new MFinal();
 //    

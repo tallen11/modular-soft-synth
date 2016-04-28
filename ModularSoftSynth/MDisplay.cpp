@@ -59,6 +59,8 @@ MDisplay::MDisplay()
     std::string vsc = Shaders::loadShaderCode("/Users/tateallen/Documents/DigitalAudio/ModularSoftSynth/ModularSoftSynth/vertex.glsl");
     std::string fsc = Shaders::loadShaderCode("/Users/tateallen/Documents/DigitalAudio/ModularSoftSynth/ModularSoftSynth/fragment.glsl");
     shaderProgramHandle = Shaders::createShaderProgram(vsc, fsc);
+    
+    particleColorHandle = glGetUniformLocation(shaderProgramHandle, "particleColor");
 }
 
 MDisplay::~MDisplay()
@@ -117,9 +119,14 @@ inline void MDisplay::processDataOriginal()
             
             freqsIndex += 2;
         }
+        
+        currentColor[0] = static_cast<GLfloat>(1.0 - maxAmpl);
+        currentColor[1] = static_cast<GLfloat>(1.0 - maxAmpl);
+        currentColor[2] = static_cast<GLfloat>(maxAmpl);
+        currentColor[3] = 1.0f;
     } else {
         for (int i = 0; i < MAX_BUFFER_SIZE; ++i) {
-            freqs[i] *= 0.8;
+            freqs[i] *= 0.95;
         }
     }
 }
@@ -164,10 +171,15 @@ inline void MDisplay::processDataSlow()
             freqsIndex += 2;
         }
         
+        currentColor[0] = static_cast<GLfloat>(1.0 - maxAmpl);
+        currentColor[1] = static_cast<GLfloat>(1.0 - maxAmpl);
+        currentColor[2] = static_cast<GLfloat>(maxAmpl);
+        currentColor[3] = 1.0f;
+        
         freqsIndex = 0;
         for (int i = 0; i < MAX_BUFFER_SIZE; ++i) {
             if (fabs(freqs[freqsIndex]) < fabs(buffer[i])) {
-                freqs[freqsIndex] = (GLdouble)buffer[i];
+                freqs[freqsIndex] = (GLdouble)(buffer[i]);
             } else {
                 freqs[freqsIndex] *= 0.75;
             }
@@ -198,6 +210,8 @@ inline void MDisplay::render()
     
     glClear(GL_COLOR_BUFFER_BIT);
     glUseProgram(shaderProgramHandle);
+    
+    glUniform4f(particleColorHandle, currentColor[0], currentColor[1], currentColor[2], currentColor[3]);
     
     glEnableVertexAttribArray(0);
     glBindBuffer(GL_ARRAY_BUFFER, vertexBufferHandle);

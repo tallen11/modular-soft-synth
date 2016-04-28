@@ -38,7 +38,7 @@ MWavPlayer::MWavPlayer(const std::string &filePath)
     
     sf_read_double(file, buffer, sampleCount);
     sf_close(file);
-    
+        
 //    printf("Read %lld items\n", num);
 }
 

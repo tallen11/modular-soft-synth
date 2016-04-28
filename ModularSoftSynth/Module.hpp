@@ -30,7 +30,7 @@ public:
     
     ModuleInput* createInput(const std::string &name) {
         auto input = new ModuleInput(name);
-        this->inputs->push_back(input);
+        inputs->push_back(input);
         return input;
     };
     

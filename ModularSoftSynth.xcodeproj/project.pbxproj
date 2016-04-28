@@ -18,6 +18,7 @@
 		A46810051CC6FCB600888D9C /* MPulser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A46810031CC6FCB600888D9C /* MPulser.cpp */; };
 		A48667831CB5845100310C29 /* MValue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A48667811CB5845100310C29 /* MValue.cpp */; };
 		A48667861CB5CA5700310C29 /* MAdder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A48667841CB5CA5700310C29 /* MAdder.cpp */; };
+		A4B428DA1CCDE3AB00534953 /* MDispayInsane.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4B428D81CCDE3AB00534953 /* MDispayInsane.cpp */; };
 		A4B434BA1CBC8AD800EF7A75 /* MLowPassFilter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4B434B81CBC8AD800EF7A75 /* MLowPassFilter.cpp */; };
 		A4B434BD1CBC9DEC00EF7A75 /* MTriadGenerator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4B434BB1CBC9DEC00EF7A75 /* MTriadGenerator.cpp */; };
 		A4B434C31CBCA95800EF7A75 /* MWhiteNoiseGenerator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A4B434C11CBCA95800EF7A75 /* MWhiteNoiseGenerator.cpp */; };
@@ -75,6 +76,8 @@
 		A48667821CB5845100310C29 /* MValue.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = MValue.hpp; sourceTree = "<group>"; };
 		A48667841CB5CA5700310C29 /* MAdder.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MAdder.cpp; sourceTree = "<group>"; };
 		A48667851CB5CA5700310C29 /* MAdder.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = MAdder.hpp; sourceTree = "<group>"; };
+		A4B428D81CCDE3AB00534953 /* MDispayInsane.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MDispayInsane.cpp; sourceTree = "<group>"; };
+		A4B428D91CCDE3AB00534953 /* MDispayInsane.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = MDispayInsane.hpp; sourceTree = "<group>"; };
 		A4B434B81CBC8AD800EF7A75 /* MLowPassFilter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MLowPassFilter.cpp; sourceTree = "<group>"; };
 		A4B434B91CBC8AD800EF7A75 /* MLowPassFilter.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = MLowPassFilter.hpp; sourceTree = "<group>"; };
 		A4B434BB1CBC9DEC00EF7A75 /* MTriadGenerator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = MTriadGenerator.cpp; sourceTree = "<group>"; };
@@ -166,6 +169,17 @@
 			name = External;
 			sourceTree = "<group>";
 		};
+		A4B428D71CCDDF9800534953 /* Visualization */ = {
+			isa = PBXGroup;
+			children = (
+				A4680FE31CC46E1E00888D9C /* MDisplay.hpp */,
+				A4680FE21CC46E1E00888D9C /* MDisplay.cpp */,
+				A4B428D91CCDE3AB00534953 /* MDispayInsane.hpp */,
+				A4B428D81CCDE3AB00534953 /* MDispayInsane.cpp */,
+			);
+			name = Visualization;
+			sourceTree = "<group>";
+		};
 		A4F6106B1CB49E87009A6F88 = {
 			isa = PBXGroup;
 			children = (
@@ -217,12 +231,11 @@
 				A4B434C11CBCA95800EF7A75 /* MWhiteNoiseGenerator.cpp */,
 				A44255041CBDA96800F9FAC0 /* MModulator.hpp */,
 				A44255031CBDA96800F9FAC0 /* MModulator.cpp */,
-				A4680FE31CC46E1E00888D9C /* MDisplay.hpp */,
-				A4680FE21CC46E1E00888D9C /* MDisplay.cpp */,
 				A4680FEF1CC4B72E00888D9C /* MWavPlayer.hpp */,
 				A4680FEE1CC4B72E00888D9C /* MWavPlayer.cpp */,
 				A46810041CC6FCB600888D9C /* MPulser.hpp */,
 				A46810031CC6FCB600888D9C /* MPulser.cpp */,
+				A4B428D71CCDDF9800534953 /* Visualization */,
 			);
 			name = Modules;
 			sourceTree = "<group>";
@@ -348,6 +361,7 @@
 				A46810051CC6FCB600888D9C /* MPulser.cpp in Sources */,
 				A4B434BD1CBC9DEC00EF7A75 /* MTriadGenerator.cpp in Sources */,
 				A4F610951CB4AEF0009A6F88 /* ModuleOutput.cpp in Sources */,
+				A4B428DA1CCDE3AB00534953 /* MDispayInsane.cpp in Sources */,
 				A4F610871CB4A635009A6F88 /* Synth.cpp in Sources */,
 				A48667831CB5845100310C29 /* MValue.cpp in Sources */,
 				A4B434C31CBCA95800EF7A75 /* MWhiteNoiseGenerator.cpp in Sources */,

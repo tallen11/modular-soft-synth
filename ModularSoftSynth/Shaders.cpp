@@ -76,11 +76,11 @@ GLuint Shaders::createShaderProgram(const std::string &vertexShaderCode, const s
         std::cout << "Shader program linking successful" << std::endl;
     }
     
-//    glDetachShader(programHandle, vertexHandle);
-//    glDetachShader(programHandle, fragmentHandle);
-//    
-//    glDeleteShader(vertexHandle);
-//    glDeleteShader(fragmentHandle);
+    glDetachShader(programHandle, vertexHandle);
+    glDetachShader(programHandle, fragmentHandle);
+    
+    glDeleteShader(vertexHandle);
+    glDeleteShader(fragmentHandle);
     
     return programHandle;
 }

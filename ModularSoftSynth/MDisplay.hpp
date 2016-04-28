@@ -34,11 +34,14 @@ private:
     GLuint vaoHandle;
     GLuint vertexBufferHandle;
     GLuint shaderProgramHandle;
+    GLint particleColorHandle;
+    
+    GLdouble freqs[MAX_BUFFER_SIZE * 2];
+    GLfloat currentColor[4];
     
     fftw_complex *fftInputBuffer;
     fftw_complex *fftOutputBuffer;
     fftw_plan plan;
-    GLdouble freqs[MAX_BUFFER_SIZE * 2];
 };
 
 inline double hanningWindow(int x)
