@@ -12,6 +12,7 @@
 
 #define WIDTH 512.0
 #define HEIGHT 512.0
+#define NODE_COUNT 1024
 
 MDisplay::MDisplay()
 {
@@ -20,8 +21,8 @@ MDisplay::MDisplay()
     rightChannelInput = createInput("right");
     
     fftInputBuffer = (double*)fftw_malloc(sizeof(double) * MAX_BUFFER_SIZE);
-    fftOutputBuffer = (double*)fftw_malloc(sizeof(double) * MAX_BUFFER_SIZE);
-    plan = fftw_plan_r2r_1d(MAX_BUFFER_SIZE, fftInputBuffer, fftOutputBuffer, FFTW_R2HC, FFTW_ESTIMATE);
+    fftOutputBuffer = (double*)fftw_malloc(sizeof(double) * NODE_COUNT);
+    plan = fftw_plan_r2r_1d(NODE_COUNT, fftInputBuffer, fftOutputBuffer, FFTW_R2HC, FFTW_ESTIMATE);
     
     if (!glfwInit()) {
         std::cout << "ERROR" << std::endl;
@@ -82,52 +83,52 @@ void MDisplay::update()
     render();
 }
 
-inline void MDisplay::processDataOriginal()
-{
-    if (leftChannelInput->canRead()) {
-        for (int i = 0; i < MAX_BUFFER_SIZE; ++i) {
-            if (leftChannelInput->canRead()) {
-                double in = leftChannelInput->readData();
-                fftInputBuffer[i] = in * hanningWindow(i);
-            } else {
-                fftInputBuffer[i] = 0.0;
-            }
-        }
-        
-        fftw_execute(plan);
-        
-        double magnitude = 0.0;
-        int freqsIndex = 0;
-        for (int i = 0; i < MAX_BUFFER_SIZE; ++i) {
-            double com = fftOutputBuffer[i];
-            freqs[freqsIndex] = (GLdouble)com;
-            freqs[freqsIndex+1] = (GLdouble)(i / WIDTH);
-            magnitude += freqs[freqsIndex] * freqs[freqsIndex];
-            freqsIndex += 2;
-        }
-        
-        freqsIndex = 0;
-        magnitude = sqrt(magnitude);
-        double maxAmpl = 0.0;
-        for (int i = 0; i < MAX_BUFFER_SIZE; ++i) {
-            freqs[freqsIndex] /= (GLdouble)magnitude;
-            if (fabs(freqs[freqsIndex]) > maxAmpl) {
-                maxAmpl = fabs(freqs[freqsIndex]);
-            }
-            
-            freqsIndex += 2;
-        }
-        
-        currentColor[0] = static_cast<GLfloat>(1.0 - maxAmpl);
-        currentColor[1] = static_cast<GLfloat>(1.0 - maxAmpl);
-        currentColor[2] = static_cast<GLfloat>(maxAmpl);
-        currentColor[3] = 1.0f;
-    } else {
-        for (int i = 0; i < MAX_BUFFER_SIZE; ++i) {
-            freqs[i] *= 0.95;
-        }
-    }
-}
+//inline void MDisplay::processDataOriginal()
+//{
+//    if (leftChannelInput->canRead()) {
+//        for (int i = 0; i < MAX_BUFFER_SIZE; ++i) {
+//            if (leftChannelInput->canRead()) {
+//                double in = leftChannelInput->readData();
+//                fftInputBuffer[i] = in * hanningWindow(i);
+//            } else {
+//                fftInputBuffer[i] = 0.0;
+//            }
+//        }
+//        
+//        fftw_execute(plan);
+//        
+//        double magnitude = 0.0;
+//        int freqsIndex = 0;
+//        for (int i = 0; i < MAX_BUFFER_SIZE; ++i) {
+//            double com = fftOutputBuffer[i];
+//            freqs[freqsIndex] = (GLdouble)com;
+//            freqs[freqsIndex+1] = (GLdouble)(i / WIDTH);
+//            magnitude += freqs[freqsIndex] * freqs[freqsIndex];
+//            freqsIndex += 2;
+//        }
+//        
+//        freqsIndex = 0;
+//        magnitude = sqrt(magnitude);
+//        double maxAmpl = 0.0;
+//        for (int i = 0; i < MAX_BUFFER_SIZE; ++i) {
+//            freqs[freqsIndex] /= (GLdouble)magnitude;
+//            if (fabs(freqs[freqsIndex]) > maxAmpl) {
+//                maxAmpl = fabs(freqs[freqsIndex]);
+//            }
+//            
+//            freqsIndex += 2;
+//        }
+//        
+//        currentColor[0] = static_cast<GLfloat>(1.0 - maxAmpl);
+//        currentColor[1] = static_cast<GLfloat>(1.0 - maxAmpl);
+//        currentColor[2] = static_cast<GLfloat>(maxAmpl);
+//        currentColor[3] = 1.0f;
+//    } else {
+//        for (int i = 0; i < MAX_BUFFER_SIZE; ++i) {
+//            freqs[i] *= 0.95;
+//        }
+//    }
+//}
 
 inline void MDisplay::processDataSlow()
 {
@@ -143,14 +144,14 @@ inline void MDisplay::processDataSlow()
         
         fftw_execute(plan);
         
-        double buffer[MAX_BUFFER_SIZE];
+        double buffer[NODE_COUNT];
         
         double magnitude = 0.0;
         int freqsIndex = 0;
-        for (int i = 0; i < MAX_BUFFER_SIZE; ++i) {
+        for (int i = 0; i < NODE_COUNT; ++i) {
             double com = fftOutputBuffer[i];
             buffer[i] = com;
-            freqs[freqsIndex+1] = (GLdouble)(i / WIDTH);
+            freqs[freqsIndex+1] = 2.0 * (GLdouble)i / NODE_COUNT;
             magnitude += buffer[i] * buffer[i];
             freqsIndex += 2;
         }
@@ -158,7 +159,7 @@ inline void MDisplay::processDataSlow()
         freqsIndex = 0;
         magnitude = sqrt(magnitude);
         double maxAmpl = 0.0;
-        for (int i = 0; i < MAX_BUFFER_SIZE; ++i) {
+        for (int i = 0; i < NODE_COUNT; ++i) {
             buffer[i] /= magnitude;
             if (fabs(buffer[i]) > maxAmpl) {
                 maxAmpl = fabs(buffer[i]);
@@ -173,7 +174,7 @@ inline void MDisplay::processDataSlow()
         currentColor[3] = 1.0f;
         
         freqsIndex = 0;
-        for (int i = 0; i < MAX_BUFFER_SIZE; ++i) {
+        for (int i = 0; i < NODE_COUNT; ++i) {
             if (fabs(freqs[freqsIndex]) < fabs(buffer[i])) {
                 freqs[freqsIndex] = (GLdouble)(buffer[i]);
             } else {
@@ -183,7 +184,7 @@ inline void MDisplay::processDataSlow()
             freqsIndex += 2;
         }
     } else {
-        for (int i = 0; i < MAX_BUFFER_SIZE; ++i) {
+        for (int i = 0; i < NODE_COUNT; ++i) {
             freqs[i] *= 0.9;
         }
     }
@@ -212,7 +213,7 @@ inline void MDisplay::render()
     glEnableVertexAttribArray(0);
     glBindBuffer(GL_ARRAY_BUFFER, vertexBufferHandle);
     glVertexAttribPointer(0, 2, GL_DOUBLE, GL_FALSE, 0, NULL);
-    glDrawArrays(GL_LINES, 0, MAX_BUFFER_SIZE);
+    glDrawArrays(GL_LINE_LOOP, 0, MAX_BUFFER_SIZE);
     glDisableVertexAttribArray(0);
     
     glfwSwapBuffers(window);
