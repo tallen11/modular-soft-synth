@@ -9,10 +9,8 @@ void main()
     float x = vertexPosition_modelspace.y - 1.0f;
     float y = vertexPosition_modelspace.x;
     
-    //NewValue = (((OldValue - OldMin) * (NewMax - NewMin)) / (OldMax - OldMin)) + NewMin
+//    float angle = (((x - (-1.0f))* (2.0f * PI - 0.0f)) / (1.0f - (-1.0f)));
+//    gl_Position = vec4(y * cos(angle), y * sin(angle), 0.0, 1.0);
     
-    float angle = (((x - (-1.0f))* (2.0f * PI - 0.0f)) / (1.0f - (-1.0f)));
-    gl_Position = vec4(y * cos(angle), y * sin(angle), 0.0, 1.0);
-    
-//    gl_Position = vec4(x, y, 0.0f, 1.0f);
+    gl_Position = vec4(x, y, 0.0f, 1.0f);
 }

@@ -19,9 +19,9 @@ MDisplay::MDisplay()
     leftChannelInput = createInput("left");
     rightChannelInput = createInput("right");
     
-    fftInputBuffer = (fftw_complex*)fftw_malloc(sizeof(fftw_complex) * MAX_BUFFER_SIZE);
-    fftOutputBuffer = (fftw_complex*)fftw_malloc(sizeof(fftw_complex) * MAX_BUFFER_SIZE);
-    plan = fftw_plan_dft_1d(MAX_BUFFER_SIZE, fftInputBuffer, fftOutputBuffer, FFTW_FORWARD, FFTW_ESTIMATE);
+    fftInputBuffer = (double*)fftw_malloc(sizeof(double) * MAX_BUFFER_SIZE);
+    fftOutputBuffer = (double*)fftw_malloc(sizeof(double) * MAX_BUFFER_SIZE);
+    plan = fftw_plan_r2r_1d(MAX_BUFFER_SIZE, fftInputBuffer, fftOutputBuffer, FFTW_R2HC, FFTW_ESTIMATE);
     
     if (!glfwInit()) {
         std::cout << "ERROR" << std::endl;
@@ -88,11 +88,9 @@ inline void MDisplay::processDataOriginal()
         for (int i = 0; i < MAX_BUFFER_SIZE; ++i) {
             if (leftChannelInput->canRead()) {
                 double in = leftChannelInput->readData();
-                fftInputBuffer[i][0] = in * hanningWindow(i);
-                fftInputBuffer[i][1] = in * hanningWindow(i);
+                fftInputBuffer[i] = in * hanningWindow(i);
             } else {
-                fftInputBuffer[i][0] = 0.0;
-                fftInputBuffer[i][1] = 0.0;
+                fftInputBuffer[i] = 0.0;
             }
         }
         
@@ -101,8 +99,8 @@ inline void MDisplay::processDataOriginal()
         double magnitude = 0.0;
         int freqsIndex = 0;
         for (int i = 0; i < MAX_BUFFER_SIZE; ++i) {
-            double com[] = { fftOutputBuffer[i][0], fftOutputBuffer[i][1] };
-            freqs[freqsIndex] = (GLdouble)com[0];
+            double com = fftOutputBuffer[i];
+            freqs[freqsIndex] = (GLdouble)com;
             freqs[freqsIndex+1] = (GLdouble)(i / WIDTH);
             magnitude += freqs[freqsIndex] * freqs[freqsIndex];
             freqsIndex += 2;
@@ -137,11 +135,9 @@ inline void MDisplay::processDataSlow()
         for (int i = 0; i < MAX_BUFFER_SIZE; ++i) {
             if (leftChannelInput->canRead()) {
                 double in = leftChannelInput->readData();
-                fftInputBuffer[i][0] = in * hanningWindow(i);
-                fftInputBuffer[i][1] = in * hanningWindow(i);
+                fftInputBuffer[i] = in * hanningWindow(i);
             } else {
-                fftInputBuffer[i][0] = 0.0;
-                fftInputBuffer[i][1] = 0.0;
+                fftInputBuffer[i] = 0.0;
             }
         }
         
@@ -152,8 +148,8 @@ inline void MDisplay::processDataSlow()
         double magnitude = 0.0;
         int freqsIndex = 0;
         for (int i = 0; i < MAX_BUFFER_SIZE; ++i) {
-            double com[] = { fftOutputBuffer[i][0], fftOutputBuffer[i][1] };
-            buffer[i] = com[0];
+            double com = fftOutputBuffer[i];
+            buffer[i] = com;
             freqs[freqsIndex+1] = (GLdouble)(i / WIDTH);
             magnitude += buffer[i] * buffer[i];
             freqsIndex += 2;
@@ -216,7 +212,7 @@ inline void MDisplay::render()
     glEnableVertexAttribArray(0);
     glBindBuffer(GL_ARRAY_BUFFER, vertexBufferHandle);
     glVertexAttribPointer(0, 2, GL_DOUBLE, GL_FALSE, 0, NULL);
-    glDrawArrays(GL_POINTS, 0, MAX_BUFFER_SIZE);
+    glDrawArrays(GL_LINES, 0, MAX_BUFFER_SIZE);
     glDisableVertexAttribArray(0);
     
     glfwSwapBuffers(window);
