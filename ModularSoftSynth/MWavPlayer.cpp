@@ -24,7 +24,7 @@ MWavPlayer::MWavPlayer(const std::string &filePath)
     }
     
     sf_count_t frameCount = info.frames;
-//    int sampleRate = info.samplerate;
+    sampleRate = info.samplerate;
     channelCount = info.channels;
     
 //    printf("frames: %lld\n", frameCount);
@@ -38,7 +38,7 @@ MWavPlayer::MWavPlayer(const std::string &filePath)
     
     sf_read_double(file, buffer, sampleCount);
     sf_close(file);
-    
+        
 //    printf("Read %lld items\n", num);
 }
 
@@ -49,8 +49,11 @@ MWavPlayer::~MWavPlayer()
 
 void MWavPlayer::update()
 {
+    int multiple = SAMPLE_RATE / sampleRate;
     while (getBufferSize() < MAX_BUFFER_SIZE) {
-        writeToOutputs(buffer[currentSampleIndex]);
+        for (int i = 0; i < multiple; ++i) {
+            writeToOutputs(buffer[currentSampleIndex]);
+        }
         currentSampleIndex += channelCount;
         if (currentSampleIndex >= sampleCount) {
             currentSampleIndex = 0;

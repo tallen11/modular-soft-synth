@@ -17,6 +17,7 @@
 #include "MFinal.hpp"
 #include "MDisplay.hpp"
 #include "MWavPlayer.hpp"
+#include "MPulser.hpp"
 #include <cmath>
 
 #define C1 32.703
@@ -39,7 +40,7 @@ TestSynth::TestSynth()
 //    connectModules(oscillator, final, "left");
 
     /* Wav Files w/ Display */
-    auto player = new MWavPlayer("/Users/tateallen/Desktop/loop1.wav");
+    auto player = new MWavPlayer("/Users/tateallen/Desktop/doots.wav");
     auto lpfOscillator = new MOscillator(0.25);
     auto lpf = new MLowPassFilter();
     auto final = new MFinal();
@@ -57,13 +58,28 @@ TestSynth::TestSynth()
     connectModules(lpfOscillator, lpf, "beta");
     connectModules(player, lpf, "data");
     connectModules(lpf, final, "left");
-    connectModules(lpf, display, "left");
+    connectModules(final, display, "left");
+    
+//    /* Testing Audio and Video Sync */
+//    auto osc = new MOscillator(500);
+//    auto pulse = new MPulser(100000, 100000);
+//    auto final = new MFinal();
+//    auto display = new MDisplay();
+//    
+//    addModule(osc);
+//    addModule(pulse);
+//    addModule(final);
+//    addModule(display);
+//    
+//    connectModules(osc, pulse, "data");
+//    connectModules(pulse, final, "left");
+//    connectModules(final, display, "left");
     
 //    /* FM Sound */
 //    double carrier = 440.0;
-//    auto fm = new MModulator(carrier * 1.5, carrier, 1.0);
-//    auto alphaValue = new MValue(0.5);
-//    auto betaValue = new MValue(0.5);
+//    auto fm = new MModulator(carrier * 10.5, carrier, 1.0);
+//    auto alphaValue = new MValue(0.1);
+//    auto betaValue = new MValue(10.0);
 //    auto final = new MFinal();
 //    
 //    addModule(alphaValue);
@@ -76,8 +92,8 @@ TestSynth::TestSynth()
 //    connectModules(fm, final, "left");
     
 //    /* Frequency Modulated Beats */
-//    auto fm = new MModulator(2.0, 440.0, 25.0);
-//    auto fm2 = new MModulator(2.0, 460.0, 25.0);
+//    auto fm = new MModulator(4.0, 440.0, 0.0);
+//    auto fm2 = new MModulator(4.0, 440.5, 0.0);
 //    auto adder = new MAdder();
 //    auto final = new MFinal();
 //    

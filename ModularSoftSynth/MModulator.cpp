@@ -44,7 +44,7 @@ void MModulator::update()
                 beta = betaInput->readData();
             }
             
-            double data = envelopeCoeff(dx) * sin(alpha * 2.0 * M_PI * carrierFrequency * dx + modulationIndex * sin(beta * 2.0 * M_PI * modFrequency * dx));
+            double data = envelopeCoeff(dx) * sin(2.0 * M_PI * carrierFrequency * dx + alpha * modulationIndex * sin(beta * 2.0 * M_PI * modFrequency * dx));
             writeToOutputs(data);
 //            output->writeData(data);
             
