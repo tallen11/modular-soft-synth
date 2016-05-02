@@ -11,8 +11,6 @@
 
 #include "ModuleDataBuffer.hpp"
 
-//#define MAX_BUFFER_SIZE 100
-
 class ModuleOutput {
     
 public:

@@ -16,16 +16,16 @@
 class MWavPlayer : public Module {
     
 public:
-    MWavPlayer(const std::string &filePath, int loops);
+    MWavPlayer(const std::string &filePath);
     ~MWavPlayer();
     void update();
     
 private:
     double *buffer;
+    int sampleRate = 0;
     int currentSampleIndex = 0;
-    int sampleCount = 0;
+    sf_count_t sampleCount = 0;
     int channelCount = 0;
-    int loops;
 };
 
 #endif /* MWavPlayer_hpp */

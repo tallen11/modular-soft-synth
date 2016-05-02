@@ -18,6 +18,8 @@
 #define MAX_BUFFER_SIZE 1024
 #define SAMPLE_RATE 44100
 
+// 44100
+
 class Module {
     
 public:
@@ -30,7 +32,7 @@ public:
     
     ModuleInput* createInput(const std::string &name) {
         auto input = new ModuleInput(name);
-        this->inputs->push_back(input);
+        inputs->push_back(input);
         return input;
     };
     
