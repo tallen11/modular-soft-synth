@@ -55,7 +55,7 @@ MFinal::MFinal()
         std::cout << "PortAudio error: " << Pa_GetErrorText(err) << std::endl;
     }
     
-    PaError streamError = Pa_OpenDefaultStream(&paStream, 0, 2, paFloat32, 44100, /* paFramesPerBufferUnspecified */ MAX_BUFFER_SIZE, MFinal::callback, this->inputs);
+    PaError streamError = Pa_OpenDefaultStream(&paStream, 0, 2, paFloat32, SAMPLE_RATE, /* paFramesPerBufferUnspecified */ MAX_BUFFER_SIZE, MFinal::callback, this->inputs);
     if (streamError != paNoError) {
         std::cout << "PortAudio stream error: " << Pa_GetErrorText(streamError) << std::endl;
     }

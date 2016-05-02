@@ -12,7 +12,7 @@
 
 #define WIDTH 512.0
 #define HEIGHT 512.0
-#define NODE_COUNT 64
+#define NODE_COUNT 32
 
 MDisplay::MDisplay()
 {
@@ -21,8 +21,8 @@ MDisplay::MDisplay()
     rightChannelInput = createInput("right");
     
     fftInputBuffer = (double*)fftw_malloc(sizeof(double) * MAX_BUFFER_SIZE);
-    fftOutputBuffer = (double*)fftw_malloc(sizeof(double) * NODE_COUNT);
-    plan = fftw_plan_r2r_1d(NODE_COUNT, fftInputBuffer, fftOutputBuffer, FFTW_R2HC, FFTW_ESTIMATE);
+    fftOutputBuffer = (double*)fftw_malloc(sizeof(double) * (NODE_COUNT + 1) * 2);
+    plan = fftw_plan_r2r_1d(NODE_COUNT * 2, fftInputBuffer, fftOutputBuffer, FFTW_R2HC, FFTW_ESTIMATE);
     
     if (!glfwInit()) {
         std::cout << "ERROR" << std::endl;
@@ -50,7 +50,8 @@ MDisplay::MDisplay()
     
     for (int i = 0; i < NODE_COUNT; ++i) {
         auto bar = new Bar((2.0 * i) / NODE_COUNT, 1.0 / NODE_COUNT);
-        bars.push_back(bar);
+        bar->setColor(gaussianColorCurve(i, NODE_COUNT, RED), gaussianColorCurve(i, NODE_COUNT, GREEN), gaussianColorCurve(i, NODE_COUNT, BLUE), 1.0f);
+        bars.push_back(bar);        
     }
     
 //    glGenBuffers(1, &vertexBufferHandle);
@@ -67,6 +68,9 @@ MDisplay::MDisplay()
     shaderProgramHandle = Shaders::createShaderProgram(vsc, fsc);
     
     particleColorHandle = glGetUniformLocation(shaderProgramHandle, "particleColor");
+    barHeightHandle = glGetUniformLocation(shaderProgramHandle, "height");
+    timeHandle = glGetUniformLocation(shaderProgramHandle, "time");
+    rotationMatrixHandle = glGetUniformLocation(shaderProgramHandle, "rotationMatrix");
 }
 
 MDisplay::~MDisplay()
@@ -75,6 +79,10 @@ MDisplay::~MDisplay()
 //    glDeleteVertexArrays(1, &VertexArrayID);
 //    glDeleteProgram(programID);
     glfwTerminate();
+    
+    for (auto bar : bars) {
+        delete bar;
+    }
     
     fftw_destroy_plan(plan);
     fftw_free(fftInputBuffer);
@@ -215,11 +223,9 @@ inline void MDisplay::processDataBars()
         
         double magnitude = 0.0;
         int freqsIndex = 0;
-        for (int i = 0; i < NODE_COUNT; ++i) {
-            double com = fftOutputBuffer[i];
-            buffer[i] = com;
-//            freqs[freqsIndex+1] = 2.0 * (GLdouble)i / NODE_COUNT;
-            magnitude += buffer[i] * buffer[i];
+        for (int i = 1; i < NODE_COUNT+1; ++i) {
+            buffer[i-1] = fftOutputBuffer[i];
+            magnitude += buffer[i-1] * buffer[i-1];
             freqsIndex += 2;
         }
         
@@ -237,9 +243,12 @@ inline void MDisplay::processDataBars()
         
         freqsIndex = 0;
         for (int i = 0; i < NODE_COUNT; ++i) {
-            if (bars[i]->height < fabs(buffer[i])) {
-                bars[i]->setHeight(fabs(buffer[i]));
-                bars[i]->setColor(1.0f, 1.0f, 1.0f, 1.0f);
+            double n = fabs(buffer[i]); // * heightBuffCurve(i, NODE_COUNT);
+            double o = bars[i]->height;
+            double pd = fabs((n - o) / o);
+            if (/* o < n */ pd > 1.5) {
+                bars[i]->setHeight(n);
+                bars[i]->resetColor();
             } else {
                 bars[i]->setHeight(bars[i]->height * responseCurve(i, NODE_COUNT) /* 0.8 */);
                 bars[i]->multColor(/* responseCurve(i, NODE_COUNT) */ 0.9);
@@ -252,7 +261,7 @@ inline void MDisplay::processDataBars()
     } else {
         for (int i = 0; i < NODE_COUNT; ++i) {
             bars[i]->setHeight(bars[i]->height * 0.9);
-            bars[i]->multColor(/* responseCurve(i, NODE_COUNT) */ 0.9);
+//            bars[i]->multColor(/* responseCurve(i, NODE_COUNT) */ 0.8);
         }
     }
 }
@@ -289,10 +298,20 @@ inline void MDisplay::render()
 
 inline void MDisplay::renderBars()
 {
+//    frames++;
+    double time = glfwGetTime();
+//    if (time - lastTime >= 1.0) {
+//        std::cout << 1000.0 / frames << " ms/f, " << frames / 1.0 << " fps" << std::endl;
+//        lastTime = time;
+//        frames = 0;
+//    }
+    
     glClear(GL_COLOR_BUFFER_BIT);
     glUseProgram(shaderProgramHandle);
+    glUniform1f(timeHandle, (GLfloat)time);
     
     for (auto bar : bars) {
+        glUniform1f(barHeightHandle, (GLfloat)bar->height);
         bar->render(particleColorHandle);
     }
     

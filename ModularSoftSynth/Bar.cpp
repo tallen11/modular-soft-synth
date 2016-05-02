@@ -69,13 +69,40 @@ void Bar::setColor(float r, float g, float b, float a)
     color[1] = g;
     color[2] = b;
     color[3] = a;
+    
+    baseColor[0] = r;
+    baseColor[1] = g;
+    baseColor[2] = b;
+    baseColor[3] = a;
 }
+
+void Bar::resetColor()
+{
+    color[0] = baseColor[0];
+    color[1] = baseColor[1];
+    color[2] = baseColor[2];
+    color[3] = baseColor[3];
+}
+
+#define BASE_GRAY 0.2f
 
 void Bar::multColor(float factor)
 {
     color[0] *= factor;
     color[1] *= factor;
     color[2] *= factor;
+    
+    if (color[0] < BASE_GRAY) {
+        color[0] = BASE_GRAY;
+    }
+    
+    if (color[1] < BASE_GRAY) {
+        color[1] = BASE_GRAY;
+    }
+    
+    if (color[2] < BASE_GRAY) {
+        color[2] = BASE_GRAY;
+    }
 }
 
 void Bar::render(GLuint colorHandle)

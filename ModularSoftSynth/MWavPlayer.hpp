@@ -22,6 +22,7 @@ public:
     
 private:
     double *buffer;
+    int sampleRate = 0;
     int currentSampleIndex = 0;
     sf_count_t sampleCount = 0;
     int channelCount = 0;

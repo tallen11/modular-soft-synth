@@ -21,6 +21,7 @@ public:
     void setColor(float r, float g, float b, float a);
     void render(GLuint colorHandle);
     
+    void resetColor();
     void multColor(float factor);
     
     double height;
@@ -29,6 +30,7 @@ private:
     double position;
     double width;
     float color[4];
+    float baseColor[4];
     GLdouble vertices[12];
     GLuint vertexBufferHandle;
     GLuint colorHandle;
