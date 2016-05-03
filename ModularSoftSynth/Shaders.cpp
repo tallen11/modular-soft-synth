@@ -10,6 +10,8 @@
 #include <fstream>
 #include <iostream>
 #include <vector>
+#include <fstream>
+#include "picoPNG.h"
 
 std::string Shaders::loadShaderCode(const std::string &filePath)
 {
@@ -83,4 +85,49 @@ GLuint Shaders::createShaderProgram(const std::string &vertexShaderCode, const s
     glDeleteShader(fragmentHandle);
     
     return programHandle;
+}
+
+Texture Shaders::loadTextureFromPNG(const std::string &filePath)
+{
+    Texture texture;
+    
+    std::ifstream file(filePath, std::ios::binary);
+    if (file.is_open()) {
+        file.unsetf(std::ios::skipws);
+        std::streampos fileSize;
+        
+        file.seekg(0, std::ios::end);
+        fileSize = file.tellg();
+        file.seekg(0, std::ios::beg);
+        
+        std::vector<unsigned char> vec;
+        vec.reserve(fileSize);
+        
+        vec.insert(vec.begin(),
+                   std::istream_iterator<unsigned char>(file),
+                   std::istream_iterator<unsigned char>());
+        
+        file.close();
+        
+        std::vector<unsigned char> bytes;
+        unsigned long width;
+        unsigned long height;
+        
+        int err = decodePNG(bytes, width, height, &(vec[0]), vec.size());
+        if (!err) {
+            texture.textureWidth = (int)width;
+            texture.textureHeight = (int)height;
+            
+            glGenTextures(1, &texture.textureHandle);
+            glBindTexture(GL_TEXTURE_2D, texture.textureHandle);
+            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, (GLint)width, (GLint)height, 0, GL_RGBA, GL_UNSIGNED_BYTE, &(bytes[0]));
+            
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+        }
+    }
+    
+    return texture;
 }

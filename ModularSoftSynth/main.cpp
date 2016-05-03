@@ -9,12 +9,15 @@
 #include <iostream>
 #include <chrono>
 #include "TestSynth.hpp"
+#include "SynthGUI.hpp"
 
 int main(int argc, const char * argv[]) {
     
+    auto gui = SynthGUI();
     auto synth = TestSynth();
     for (;;) {
         synth.update();
+        gui.update();
     }
     
     return 0;

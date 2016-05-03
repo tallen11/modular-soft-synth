@@ -30,35 +30,35 @@
 
 TestSynth::TestSynth()
 {
-//    /* Basic Sine Waves */
-//    auto oscillator = new MOscillator(220.0);
-//    auto final = new MFinal();
-//    
-//    addModule(oscillator);
-//    addModule(final);
-//    
-//    connectModules(oscillator, final, "left");
-
-    /* Wav Files w/ Display */
-    auto player = new MWavPlayer("/Users/tateallen/Desktop/doots.wav");
-    auto lpfOscillator = new MOscillator(0.25);
-    auto lpf = new MLowPassFilter();
+    /* Basic Sine Waves */
+    auto oscillator = new MOscillator(220.0);
     auto final = new MFinal();
-    auto display = new MDisplay();
     
-    lpfOscillator->setEnabled(false);
-    lpf->setEnabled(false);
-    
-    addModule(player);
-    addModule(lpfOscillator);
-    addModule(lpf);
+    addModule(oscillator);
     addModule(final);
-    addModule(display);
     
-    connectModules(lpfOscillator, lpf, "beta");
-    connectModules(player, lpf, "data");
-    connectModules(lpf, final, "left");
-    connectModules(final, display, "left");
+    connectModules(oscillator, final, "left");
+
+//    /* Wav Files w/ Display */
+//    auto player = new MWavPlayer("/Users/tateallen/Desktop/doots.wav");
+//    auto lpfOscillator = new MOscillator(0.25);
+//    auto lpf = new MLowPassFilter();
+//    auto final = new MFinal();
+//    auto display = new MDisplay();
+//    
+//    lpfOscillator->setEnabled(false);
+//    lpf->setEnabled(false);
+//    
+//    addModule(player);
+//    addModule(lpfOscillator);
+//    addModule(lpf);
+//    addModule(final);
+//    addModule(display);
+//    
+//    connectModules(lpfOscillator, lpf, "beta");
+//    connectModules(player, lpf, "data");
+//    connectModules(lpf, final, "left");
+//    connectModules(final, display, "left");
     
 //    /* Testing Audio and Video Sync */
 //    auto osc = new MOscillator(500);
